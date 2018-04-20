@@ -1,0 +1,23 @@
+{
+  "name": "Rand",
+  "plural": "rand",
+  "base": "Model",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "result": {
+      "type": "any",
+      "required": true
+    },
+    "blockNumber": {
+      "type": "number",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

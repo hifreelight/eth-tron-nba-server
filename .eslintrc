@@ -1,0 +1,34 @@
+{
+  "extends": "loopback",
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "rules": {
+    "max-len": [
+      "warn",
+      120,
+      4,
+      {
+        "ignoreComments": true,
+        "ignoreUrls": true,
+        "ignorePattern": "^\\s*const\\s.+=\\s*require\\s*\\("
+      }
+    ],
+    "object-curly-spacing": [
+      "warn",
+      "always"
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ]
+  }
+}

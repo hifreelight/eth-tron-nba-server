@@ -1,0 +1,23 @@
+{
+  "restApiRoot": "/",
+  "host": "0.0.0.0",
+  "port": 2005,
+  "remoting": {
+    "context": false,
+    "rest": {
+      "handleErrors": false,
+      "normalizeHttpPath": false,
+      "xml": false
+    },
+    "json": {
+      "strict": false,
+      "limit": "100kb"
+    },
+    "urlencoded": {
+      "extended": true,
+      "limit": "100kb"
+    },
+    "cors": false
+  },
+  "provider": "https://api.etherscan.io/api?module=proxy&action=eth_getBlockByNumber&tag={blockNumber}&boolean=true"
+}
