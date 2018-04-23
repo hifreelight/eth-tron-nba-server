@@ -14,4 +14,11 @@ describe('A suite for block', function() {
         debug('data %O', data);
       });
   });
+  it('test time', function() {
+    let now = new Date().getTime();
+    debug('now is %s', now);
+    app.models.Block.find({where: {used: false, time: {lt: now - 1000 * 60 * 10}}, order: 'number DESC', limit: 2}, function(err, data) {
+      debug('blocks : %O', data);
+    });
+  });
 });
