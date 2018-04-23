@@ -16,7 +16,7 @@ module.exports = function(Rand) {
         if (!info) {
           // TODO: handle no
           let now = new Date().getTime();
-          debug('update 1000 at %s', now);
+          console.error(`add block infos have been used. now try to set block infos to unused before ${forwardTime} minutes.`);
           return Block.updateAll({where: {used: false, time: {lt: now - 1000 * 60 * forwardTime}}, order: 'number DESC', limit: 1000}, {used: false})
             .then(function(data) {
               return Block.findOne({ where: {used: false}, order: 'number DESC' })

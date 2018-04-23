@@ -4,7 +4,7 @@ const fetch = require('node-fetch');
 const debug = require('debug')('lib:block');
 const app = require('../server');
 const provider = process.env.BLOCK_PROVIDER || app.get('provider');
-const MAX_BLOCK = 1000;
+const MAX_BLOCK = process.env.MAX_BLOCK || 1000;
 
 let top = 0; // 0: not set yet
 
