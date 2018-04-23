@@ -35,16 +35,19 @@ module.exports = function(Rand) {
       .then(info => {
         info.used = true;
         return Block.updateAll({number: info.number}, info)
-        .then(count => {
+        .then(_count => {
           let svc = new RandSvc(info);
 
           if (type === 'integer') {
-            return cb(null, svc.integer(min, max));
+            return {result: svc.integer(min, max), blockNumber: svc.blockNumber};
           } else if (type === 'array') {
-            return cb(null, svc.array(count, min, max));
+            return {result: svc.array(count, min, max), blockNumber: svc.blockNumber};
           }
         })
         .catch(err => cb(err));
+      })
+      .then(result => {
+        return cb(null, result);
       })
       .catch(err => cb(err));
   };
