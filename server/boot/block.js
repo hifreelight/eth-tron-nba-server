@@ -14,6 +14,10 @@ module.exports = function(app) {
         })))
           .then(() => {
             setTimeout(scheduleGetInfo, 60000);
+          })
+          .catch(err => {
+            // console.error(err);
+            setTimeout(scheduleGetInfo, 60000);
           });
       });
   };
