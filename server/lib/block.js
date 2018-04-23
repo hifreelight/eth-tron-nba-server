@@ -13,7 +13,7 @@ function getInfoFromProvider(blockNumber) {
   debug('getInfoFromProvider: endpoint %s', endpoint);
   let opts = {};
   opts.timeout = 1000 * 60;
-  return fetch(endpoint)
+  return fetch(endpoint, opts)
     .then(r => {
       debug('requested url (%d): %s', r.status, endpoint);
       if (!r.ok) {
