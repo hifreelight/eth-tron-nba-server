@@ -22,6 +22,8 @@
   "devDependencies": {
     "eslint": "^2.13.1",
     "eslint-config-loopback": "^4.0.0",
+    "expect": "^22.4.3",
+    "mocha": "^5.1.1",
     "nsp": "^2.1.0"
   },
   "repository": {

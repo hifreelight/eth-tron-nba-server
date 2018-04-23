@@ -1,6 +1,7 @@
 'use strict';
 
 const blockSvc = require('../lib/block');
+let debug = require('debug')('rand:boot:block');
 
 module.exports = function(app) {
   let Block = app.models.Block;
@@ -13,6 +14,10 @@ module.exports = function(app) {
           hash: info.hash,
         })))
           .then(() => {
+            setTimeout(scheduleGetInfo, 60000);
+          })
+          .catch(err => {
+            debug('schedule err: %O', err);
             setTimeout(scheduleGetInfo, 60000);
           });
       });
