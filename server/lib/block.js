@@ -11,8 +11,9 @@ let top = 0; // 0: not set yet
 function getInfoFromProvider(blockNumber) {
   let endpoint = provider.replace('{blockNumber}', blockNumber ? blockNumber.toString(16) : 'latest');
   debug('getInfoFromProvider: endpoint %s', endpoint);
-
-  return fetch(endpoint)
+  let opts = {};
+  opts.timeout = 1000 * 60;
+  return fetch(endpoint, opts)
     .then(r => {
       debug('requested url (%d): %s', r.status, endpoint);
       if (!r.ok) {
