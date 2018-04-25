@@ -6,10 +6,15 @@ let forwardTime = 20; //minutes
 
 module.exports = function(Rand) {
   Rand.generate = function(type, min, max, count, arr, cb) {
-    if (type !== 'integer' && !(type !== 'array' || count >= 0) && type !== 'truffle') {
+    if (type !== 'integer' && type !== 'array' && type !== 'shuffle') {
       return cb(new Error('not supported type'));
     }
-
+    if (type == 'array' && count < 0) {
+      return cb(new Error('count should ge zero'));
+    }
+    if (type == 'shuffle' && arr == undefined) {
+      return cb(new Error('arr undefined'));
+    }
     let Block = Rand.app.models.Block;
     Block.findOne({ where: {used: false}, order: 'number DESC' })
       .then(info => {
