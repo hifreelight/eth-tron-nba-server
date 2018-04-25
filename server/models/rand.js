@@ -6,7 +6,7 @@ let forwardTime = 20; //minutes
 
 module.exports = function(Rand) {
   Rand.generate = function(type, min, max, count, arr, cb) {
-    if (type !== 'integer' && !(type !== 'array' || count >= 0) && type !== 'truffle') {
+    if (type !== 'integer' && !(type !== 'array' || count >= 0) && type !== 'shuffle') {
       return cb(new Error('not supported type'));
     }
 
