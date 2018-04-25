@@ -39,6 +39,12 @@ class Rand {
     }
   }
 
+  shuffle(arr) {
+    if (useChance) {
+      return this.chance.shuffle(arr);
+    }
+  }
+
   integer(min, max) {
     if (useChance) {
       return this.chance.integer({ min: min, max: max });
