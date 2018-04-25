@@ -5,8 +5,8 @@ let debug = require('debug')('rand:models:rand');
 let forwardTime = 20; //minutes
 
 module.exports = function(Rand) {
-  Rand.generate = function(type, min, max, count, cb) {
-    if (type !== 'integer' && !(type !== 'array' || count >= 0)) {
+  Rand.generate = function(type, min, max, count, arr, cb) {
+    if (type !== 'integer' && !(type !== 'array' || count >= 0) && type !== 'truffle') {
       return cb(new Error('not supported type'));
     }
 
@@ -42,6 +42,8 @@ module.exports = function(Rand) {
             return {result: svc.integer(min, max), blockNumber: svc.blockNumber};
           } else if (type === 'array') {
             return {result: svc.array(count, min, max), blockNumber: svc.blockNumber};
+          } else if (type === 'shuffle') {
+            return {result: svc.shuffle(arr), blockNumber: svc.blockNumber};
           }
         })
         .catch(err => cb(err));
@@ -62,6 +64,7 @@ module.exports = function(Rand) {
       { arg: 'min', type: 'number' },
       { arg: 'max', type: 'number' },
       { arg: 'count', type: 'number' },
+      { arg: 'arr', type: 'array' },
     ],
     returns: { root: true, type: 'Rand' },
   });
