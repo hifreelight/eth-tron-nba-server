@@ -6,10 +6,10 @@ let forwardTime = 20; //minutes
 
 module.exports = function(Rand) {
   Rand.generate = function(type, min, max, count, arr, cb) {
-    if (type !== 'integer' && type !== 'array' && type !== 'shuffle') {
+    if (type !== 'integer' && type !== 'array' && type !== 'shuffle' && type !== 'unique') {
       return cb(new Error('not supported type'));
     }
-    if (type == 'array' && count < 0) {
+    if (type == 'array' && count < 0 || type == 'unique' && count < 0) {
       return cb(new Error('count should ge zero'));
     }
     if (type == 'shuffle' && arr == undefined) {
@@ -49,6 +49,8 @@ module.exports = function(Rand) {
             return {result: svc.array(count, min, max), blockNumber: svc.blockNumber};
           } else if (type === 'shuffle') {
             return {result: svc.shuffle(arr), blockNumber: svc.blockNumber};
+          } else if (type === 'unique') {
+            return {result: svc.unique(count, min, max), blockNumber: svc.blockNumber};
           }
         })
         .catch(err => cb(err));

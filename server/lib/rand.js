@@ -50,6 +50,12 @@ class Rand {
       return this.chance.integer({ min: min, max: max });
     }
   }
+
+  unique(count, min, max) {
+    if (useChance) {
+      return this.chance.unique(this.chance.integer, count, {min, max});
+    }
+  }
 }
 
 module.exports = Rand;
