@@ -9,7 +9,10 @@ let app = require('../server/server');
 
 describe('A suite for block', function() {
   it('test updateAll', function() {
-    app.models.Block.updateAll({}, {used: false})
+    let now = new Date().getTime();
+    debug('now is %s', now);
+
+    app.models.Block.updateAll({used: false, time: {lt: now - 1000 * 60 * 10, gt: now - 1000 * 60 * 130}}, {used: true})
       .then(function(data) {
         debug('data %O', data);
       });
