@@ -22,7 +22,7 @@ module.exports = function(Rand) {
           // TODO: handle no
           let now = new Date().getTime();
           console.error(`add block infos have been used. now try to set block infos to unused before ${forwardTime} minutes.`);
-          return Block.updateAll({used: true, time: {lt: now - 1000 * 60 * forwardTime, gt: now - 1000 * 60 * (forwardTime + 120)}}, {used: false})
+          return Block.updateAll({used: true, time: {lt: now - 1000 * 60 * forwardTime, gt: now - 1000 * 60 * (forwardTime + 60 * 10)}}, {used: false})
             .then(function(data) {
               console.log('update count is %o', data);
               return Block.findOne({ where: {used: false}, order: 'number DESC' })
