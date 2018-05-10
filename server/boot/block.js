@@ -20,6 +20,10 @@ module.exports = function(app) {
             debug('schedule err: %O', err);
             setTimeout(scheduleGetInfo, 60000);
           });
+      })
+      .catch(err => {
+        debug('schedule err: %O', err);
+        setTimeout(scheduleGetInfo, 60000);
       });
   };
 
