@@ -29,6 +29,9 @@ function getInfoFromProvider(blockNumber) {
         number: parseInt(r.result.number),
         time: parseInt(r.result.timestamp),
       };
+    })
+    .catch((err) => {
+      throw err;
     });
 }
 
