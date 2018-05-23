@@ -14,7 +14,7 @@
     ]
   },
   "Block": {
-    "dataSource": "db",
+    "dataSource": "mongoDb",
     "public": false
   },
   "Rand": {
