@@ -1,6 +1,6 @@
 {
-  "db": {
-    "name": "db",
+  "mongoDb": {
+    "name": "mongoDb",
     "localStorage": "rand",
     "file": "/data/rand.dat",
     "connector": "memory"
