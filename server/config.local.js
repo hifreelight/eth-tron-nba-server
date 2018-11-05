@@ -9,6 +9,6 @@ let redis = {
 module.exports = {
   appName: 'rand',
   host: process.env.HOST || '0.0.0.0',
-  port: process.env.PORT || 3005,
+  port: process.env.PORT || 2005,
   redis: redis,
 };

@@ -20,5 +20,18 @@
   "Rand": {
     "dataSource": null,
     "public": true
+  },
+  "Match": {
+    "dataSource": "mongoDb",
+    "public": true,
+    "options": {
+      "remoting": {
+        "sharedMethods": {
+          "*": false,
+          "find": true,
+          "_create": true
+        }
+      }
+    }
   }
 }

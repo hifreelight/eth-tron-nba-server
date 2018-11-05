@@ -1,0 +1,78 @@
+{
+  "name": "Match",
+  "plural": "matches",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "eventId": {
+      "type": "number",
+      "required": true
+    },
+    "category": {
+      "type": "string",
+      "required": true
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "time": {
+      "type": "string",
+      "required": true
+    },
+    "name1": {
+      "type": "string",
+      "required": true
+    },
+    "img1": {
+      "type": "string"
+    },
+    "score1": {
+      "type": "number"
+    },
+    "name2": {
+      "type": "string",
+      "required": true
+    },
+    "img2": {
+      "type": "string"
+    },
+    "score2": {
+      "type": "number"
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {
+    "_create": {
+      "accepts": [
+        {
+          "arg": "data",
+          "type": "Match",
+          "http": { "source": "body" }
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": {
+        "root": true,
+        "type": "Match",
+        "http": {
+          "source": "res"
+        }
+      },
+      "http": {
+        "path": "/",
+        "verb": "post"
+      },
+      "notes": "save match"
+    }
+  }
+}

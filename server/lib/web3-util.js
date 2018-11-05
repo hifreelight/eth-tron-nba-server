@@ -91,6 +91,7 @@ module.exports = class Web3Util extends EventEmitter {
   }
 
   async setScanBlockNumber(scanFromBlockNumber) {
+    let web3 = this.pubWeb3;
     if (scanFromBlockNumber) {
       this.scanFromBlockNumber = scanFromBlockNumber;
       await this.setCache(this.BLOCK_NUMBER_KEY, scanFromBlockNumber);

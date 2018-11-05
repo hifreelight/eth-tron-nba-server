@@ -26,7 +26,7 @@
       "required": true,
       "default": false
     }
-},
+  },
   "validations": [],
   "relations": {},
   "acls": [],

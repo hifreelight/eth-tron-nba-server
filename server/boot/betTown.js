@@ -8,11 +8,11 @@ module.exports = async function(app) {
   app.web3 = new Web3Util(app);
   let err;
 
-  await app.web3.isListening()
-    .catch(e => {
-      console.log('web3 private service cannot be connected.');
-      err = e;
-    });
+  // await app.web3.isListening()
+  //   .catch(e => {
+  //     console.log('web3 private service cannot be connected.');
+  //     err = e;
+  //   });
   await app.web3.isListening(true)
     .catch(e => {
       console.log('web3 public service cannot be connected.');
@@ -46,11 +46,11 @@ module.exports = async function(app) {
   });
 
   // FIXME: paging
-  let wallets = await app.models.Wallet.find({ fields: { pubilcAddress: true } });
-  let addresses = wallets.map(w => w.pubilcAddress.toLowerCase());
-  await app.web3.addWatchAddress(addresses);
+  // let wallets = await app.models.Wallet.find({ fields: { pubilcAddress: true } });
+  // let addresses = wallets.map(w => w.pubilcAddress.toLowerCase());
+  // await app.web3.addWatchAddress(addresses);
 
-  await onTime(app.web3);
+  // await onTime(app.web3);
 
   console.log('all web3 services are connected.');
 };
