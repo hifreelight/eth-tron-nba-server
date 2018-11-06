@@ -53,6 +53,7 @@ module.exports = async function(app) {
   // await onTime(app.web3);
 
   console.log('all web3 services are connected.');
+  // app.web3.listenGame();
 };
 
 async function onTime(web3) {

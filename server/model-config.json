@@ -29,7 +29,8 @@
         "sharedMethods": {
           "*": false,
           "find": true,
-          "_create": true
+          "_create": true,
+          "basketball": true
         }
       }
     }

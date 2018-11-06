@@ -8,6 +8,7 @@
 4. 合约保存数据
 5. 部署 rand.bet.town
 
+api.bet.town
 
 https://api.etherscan.io/api?module=proxy&action=eth_getBlockByNumber&tag=latest&boolean=true
 
@@ -20,3 +21,15 @@ https://fomosports.me/nba-18-19
 get: http://localhost:2005/api/v1/service/matches
 
 {"where":{"category":"yingchao"},"order":"time asc"}
+
+{"where":{"category":"nba"},"order":"time asc"}
+
+## 列表
+
+get: /api/v1/service/matches/basketball
+
+```js
+{
+  status: 'open' // opening coming over
+}
+```

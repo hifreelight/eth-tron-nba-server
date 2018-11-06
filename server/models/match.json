@@ -6,7 +6,17 @@
   "options": {
     "validateUpsert": true
   },
+  "mixins": {
+    "Filter": {
+      "queryLimit": 100
+    }
+  },
   "properties": {
+    "id": {
+      "type": "string",
+      "id": true,
+      "defaultFn": "uuidv4"
+    },
     "eventId": {
       "type": "number",
       "required": true
@@ -42,6 +52,12 @@
     },
     "score2": {
       "type": "number"
+    },
+    "periodCn": {
+      "type": "string"
+    },
+    "game": {
+      "type": "number"
     }
   },
   "validations": [],
@@ -73,6 +89,31 @@
         "verb": "post"
       },
       "notes": "save match"
+    },
+    "basketball": {
+      "accepts": [
+        {
+          "arg": "status",
+          "type": "string"
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": {
+        "root": true,
+        "type": "Match",
+        "http": {
+          "source": "res"
+        }
+      },
+      "http": {
+        "path": "/basketball",
+        "verb": "get"
+      },
+      "notes": "find match"
     }
   }
 }

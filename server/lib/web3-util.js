@@ -353,5 +353,25 @@ module.exports = class Web3Util extends EventEmitter {
       .on('receipt', console.log)
       .on('error', console.error);
   }
+  async listenGame() {
+    let web3 = this.pubWeb3;
+    var GameAddr = '0xBDd3Ee8afa7b41F1BDfe02200bFA171535caFc27';
+    // app.web3.eth.defaultAccount = app.web3.eth.accounts[0];
+    let tokenName = 'BetTown';
+    let {address, owner} = contracts.BetTown;
+    let contract = new web3.eth.Contract(require('../../contracts/' + tokenName).abi, address, { from: owner });
+    // let contract = new web3.eth.contract(ABI).at(GameAddr);
+    contract = contract.at(GameAddr);
+
+    let events = contract.allEvents({ fromBlock: 0, toBlock: 'latest' });
+
+    events.get(function(error, logs){
+        if (!error) {
+            console.log(logs);
+        } else {
+            console.error(error);
+        }
+    });
+  }
 };
 

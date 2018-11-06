@@ -2,6 +2,20 @@
   "contractName": "BetTown",
   "abi": [
     {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newCallbackGasPrice",
+          "type": "uint256"
+        }
+      ],
+      "name": "ownerSetCallbackGasPrice",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
       "constant": true,
       "inputs": [],
       "name": "totalWeiWon",
@@ -44,17 +58,21 @@
       "type": "function"
     },
     {
-      "constant": true,
-      "inputs": [],
-      "name": "betId",
-      "outputs": [
+      "constant": false,
+      "inputs": [
         {
-          "name": "",
-          "type": "uint256"
+          "name": "myid",
+          "type": "bytes32"
+        },
+        {
+          "name": "result",
+          "type": "string"
         }
       ],
+      "name": "__callback",
+      "outputs": [],
       "payable": false,
-      "stateMutability": "view",
+      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -80,6 +98,28 @@
         }
       ],
       "name": "ownerSetTreasury",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "myid",
+          "type": "bytes32"
+        },
+        {
+          "name": "result",
+          "type": "string"
+        },
+        {
+          "name": "proof",
+          "type": "bytes"
+        }
+      ],
+      "name": "__callback",
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
@@ -261,11 +301,11 @@
     {
       "constant": true,
       "inputs": [],
-      "name": "randomServer",
+      "name": "gasForOraclize",
       "outputs": [
         {
           "name": "",
-          "type": "address"
+          "type": "uint32"
         }
       ],
       "payable": false,
@@ -334,24 +374,6 @@
     },
     {
       "constant": false,
-      "inputs": [
-        {
-          "name": "myid",
-          "type": "uint256"
-        },
-        {
-          "name": "result",
-          "type": "uint256"
-        }
-      ],
-      "name": "randomResult",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": false,
       "inputs": [],
       "name": "playerWithdrawPendingTransactions",
       "outputs": [
@@ -408,6 +430,46 @@
     },
     {
       "constant": false,
+      "inputs": [
+        {
+          "name": "originalPlayerBetId",
+          "type": "bytes32"
+        },
+        {
+          "name": "sendTo",
+          "type": "address"
+        },
+        {
+          "name": "originalPlayerProfit",
+          "type": "uint256"
+        },
+        {
+          "name": "originalPlayerBetValue",
+          "type": "uint256"
+        }
+      ],
+      "name": "ownerRefundPlayer",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "newSafeGasToOraclize",
+          "type": "uint32"
+        }
+      ],
+      "name": "ownerSetOraclizeSafeGas",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
       "inputs": [],
       "name": "ownerkill",
       "outputs": [],
@@ -441,32 +503,6 @@
       "outputs": [],
       "payable": true,
       "stateMutability": "payable",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "originalPlayerBetId",
-          "type": "uint256"
-        },
-        {
-          "name": "sendTo",
-          "type": "address"
-        },
-        {
-          "name": "originalPlayerProfit",
-          "type": "uint256"
-        },
-        {
-          "name": "originalPlayerBetValue",
-          "type": "uint256"
-        }
-      ],
-      "name": "ownerRefundPlayer",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
       "type": "function"
     },
     {
@@ -514,7 +550,7 @@
         {
           "indexed": true,
           "name": "BetID",
-          "type": "uint256"
+          "type": "bytes32"
         },
         {
           "indexed": true,
@@ -551,7 +587,7 @@
         {
           "indexed": true,
           "name": "BetID",
-          "type": "uint256"
+          "type": "bytes32"
         },
         {
           "indexed": true,
@@ -582,6 +618,11 @@
           "indexed": false,
           "name": "Status",
           "type": "int256"
+        },
+        {
+          "indexed": false,
+          "name": "Proof",
+          "type": "bytes"
         }
       ],
       "name": "LogResult",
@@ -593,7 +634,7 @@
         {
           "indexed": true,
           "name": "BetID",
-          "type": "uint256"
+          "type": "bytes32"
         },
         {
           "indexed": true,

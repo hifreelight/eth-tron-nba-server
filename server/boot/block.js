@@ -14,16 +14,16 @@ module.exports = function(app) {
           hash: info.hash,
         })))
           .then(() => {
-            setTimeout(scheduleGetInfo, 60000);
+            // setTimeout(scheduleGetInfo, 60000);
           })
           .catch(err => {
             debug('schedule err: %O', err);
-            setTimeout(scheduleGetInfo, 60000);
+            // setTimeout(scheduleGetInfo, 60000);
           });
       })
       .catch(err => {
         debug('schedule err: %O', err);
-        setTimeout(scheduleGetInfo, 60000);
+        // setTimeout(scheduleGetInfo, 60000);
       });
   };
 
