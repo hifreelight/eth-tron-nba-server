@@ -74,6 +74,9 @@ class DateUtils {
   getTimeByHour(h, timezone = 8, format = 'YYYY-MM-DD HH:mm:ss') {
     return moment().add('hours', h).utcOffset(60 * timezone).format(format);
   }
+  string2timestamp(string) {
+    return moment(string).unix();
+  }
 }
 
 module.exports = DateUtils;
