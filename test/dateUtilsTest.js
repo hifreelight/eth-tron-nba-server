@@ -53,6 +53,11 @@ describe('dateUtils', function() {
     console.log(time);
     done();
   });
+  it('test days', function(done) {
+    let time = du.getTimeByDay(2);
+    console.log(time);
+    done();
+  });
   it('test string2timestamp', function(done) {
     let time = du.string2timestamp('2018-11-07 20:00');
     console.log(time);

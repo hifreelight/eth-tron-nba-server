@@ -10,7 +10,7 @@ let moment = require('moment');
 
 describe('A suite for fomo', function() {
   it('test createGame', function() {
-    fomo.createGame('12', ['76er', 'huo'])
+    fomo.createGame('130842', ['Rocket', 'Thund'])
       .then(response => {
         console.log('test createGame response is %o', response);
         // console.log(fomo.web3.utils.hexToBytes(response.logs[0].data));
@@ -21,15 +21,19 @@ describe('A suite for fomo', function() {
   });
   it('test data', function() {
     let data = '0x000000000000000000000000000000000000000000000000000000005be2990a';
-    console.log(fomo.web3.utils.hexToNumberString(data));
+    data = '0x43484920312d3400000000000000000000000000000000000000000000000000';
+    data = '0x4348492031382b00000000000000000000000000000000000000000000000000';
+    // console.log(fomo.web3.utils.hexToNumberString(data));
     // console.log(fomo.web3.utils.hexToBytes(data));
-    // console.log(fomo.web3.utils.toAscii(data));
+    console.log(fomo.web3.utils.toAscii(data));
     // let SolidityCoder = require('web3/lib/solidity/coder.js');
     // let d = SolidityCoder.decodeParams(['string', 'uint'], log.data.replace('0x', ''));
     // let d = fomo._decodeEventABI({ data: '0x0' }); //event raw data
     // console.log(d);
   });
   it('test onGameCreated', function() {
+    console.log('givenProvider is %o', fomo.web3.givenProvider);
+    console.log('currentProvider is %o', fomo.web3.currentProvider);
     fomo.onGameCreated();
   });
   it('test getGameStatus', function() {

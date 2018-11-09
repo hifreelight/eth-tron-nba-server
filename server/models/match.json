@@ -56,8 +56,12 @@
     "periodCn": {
       "type": "string"
     },
-    "game": {
+    "gameId": {
       "type": "number"
+    },
+    "isCreated":{
+      "type": "number",
+      "default": 0
     }
   },
   "validations": [],
@@ -96,7 +100,8 @@
       "accepts": [
         {
           "arg": "status",
-          "type": "string"
+          "type": "string",
+          "description": "开放中：opening，即将到来： coming，结束： over"
         },
         {
           "arg": "options",

@@ -72,10 +72,16 @@ class DateUtils {
     return moment.duration(moment(to) - moment(from)).as('days');
   }
   getTimeByHour(h, timezone = 8, format = 'YYYY-MM-DD HH:mm:ss') {
-    return moment().add('hours', h).utcOffset(60 * timezone).format(format);
+    return moment().add(h, 'hours').utcOffset(60 * timezone).format(format);
+  }
+  getTimeByDay(days, timezone = 8, format = 'YYYY-MM-DD HH:mm:ss') {
+    return moment().add(days, 'days').utcOffset(60 * timezone).format(format);
   }
   string2timestamp(string) {
     return moment(string).unix();
+  }
+  getCurrentTimestamp() {
+    return moment().unix();
   }
 }
 

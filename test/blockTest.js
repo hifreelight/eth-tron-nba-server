@@ -12,7 +12,7 @@ describe('A suite for block', function() {
     let now = new Date().getTime();
     debug('now is %s', now);
 
-    app.models.Block.updateAll({used: false, time: {lt: now - 1000 * 60 * 10, gt: now - 1000 * 60 * 130}}, {used: true})
+    app.models.Block.updateAll({ used: false, time: { lt: now - 1000 * 60 * 10, gt: now - 1000 * 60 * 130 } }, { used: true })
       .then(function(data) {
         debug('data %O', data);
       });
@@ -20,7 +20,7 @@ describe('A suite for block', function() {
   it('test time', function() {
     let now = new Date().getTime();
     debug('now is %s', now);
-    app.models.Block.find({where: {used: false, time: {lt: now - 1000 * 60 * 10}}, order: 'number DESC', limit: 2}, function(err, data) {
+    app.models.Block.find({ where: { used: false, time: { lt: now - 1000 * 60 * 10 } }, order: 'number DESC', limit: 2 }, function(err, data) {
       debug('blocks : %O', data);
     });
   });

@@ -27,14 +27,17 @@ class BetTownFomo {
     this.web3 = web3;
     this.contract = fomoContract;
   }
-  createGame(name, teamNames) {
+  async createGame(name, teamNames) {
     teamNames = teamNames.map((n)=>{
       return web3.utils.fromAscii(n);
     });
     let txBuilder = fomoContract.methods.createGame(name, teamNames);
     let encodedTx = txBuilder.encodeABI();
     let amountOfGas = 400000;
+    let nonce = await web3.eth.getTransactionCount(activeAddress) + 1;
+    debug('createGame once is %d', nonce);
     let transactionObject = {
+      // nonce: nonce,
       gasPrice: '20000000000',
       gas: amountOfGas,
       data: encodedTx,
@@ -59,11 +62,14 @@ class BetTownFomo {
         console.error('signTransaction err is %o', err);
       });
   }
-  send(fun, ...args) {
+  async send(fun, ...args) {
     let txBuilder = fomoContract.methods[fun](...args);
     let encodedTx = txBuilder.encodeABI();
     let amountOfGas = 400000;
+    let nonce = await web3.eth.getTransactionCount(activeAddress) + 1;
+    debug('send once is %d', nonce);
     let transactionObject = {
+      // nonce: nonce,
       gasPrice: '20000000000',
       gas: amountOfGas,
       data: encodedTx,
