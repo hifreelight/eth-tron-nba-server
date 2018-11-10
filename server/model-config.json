@@ -30,7 +30,8 @@
           "*": false,
           "find": true,
           "_create": true,
-          "basketball": true
+          "basketball": true,
+          "detail": true
         }
       }
     }

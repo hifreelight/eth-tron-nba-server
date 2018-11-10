@@ -8,7 +8,11 @@
             "env": {
               "NODE_ENV": "test",
               "PRIVATE_KEY": "221310E2B78B34A2D756A1E8ED79A6BCCE1ADD1FE31D3313A991F70E993E9294",
-              "DEBUG": "rand:*"
+              "DEBUG": "rand:*",
+              "FOMO_ADDRESS":"",
+              "FOMO_OWNER":"",
+              "FOMO_ACTIVE_ADDRESS":"",
+              "FOMO_ACTIVE_PRIVATE_KEY":"",
             },
             "name": "Launch Program",
             "program": "${workspaceFolder}\\server\\server.js"

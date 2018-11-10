@@ -65,7 +65,20 @@
     }
   },
   "validations": [],
-  "relations": {},
+  "relations": {
+    "team1": {
+      "type": "hasOne",
+      "model": "Team",
+      "foreignKey": "nameZh",
+      "primaryKey": "name1"
+    },
+    "team2": {
+      "type": "hasOne",
+      "model": "Team",
+      "foreignKey": "nameZh",
+      "primaryKey": "name2"
+    }
+  },
   "acls": [],
   "methods": {
     "_create": {
@@ -121,6 +134,32 @@
         "verb": "get"
       },
       "notes": "find match"
+    },
+    "detail": {
+      "accepts": [
+        {
+          "arg": "eventId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "arg": "options",
+          "type": "object",
+          "http": "optionsFromRequest"
+        }
+      ],
+      "returns": {
+        "root": true,
+        "type": "Match",
+        "http": {
+          "source": "res"
+        }
+      },
+      "http": {
+        "path": "/:eventId",
+        "verb": "get"
+      },
+      "notes": "find one match"
     }
   }
 }

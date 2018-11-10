@@ -2,6 +2,7 @@
 const _ = require('lodash');
 
 let debug = require('debug')('rand:match');
+const util = require('../lib/util');
 const DateUtils = require('../lib/dateUtils');
 let du = new DateUtils();
 
@@ -10,15 +11,25 @@ const STATUS_COMING = 'coming';
 const STATUS_OVER = 'over';
 const MATCH_OVER = '完赛';
 const EARLY_OPENING_HOURS = 24;
+const AFTER_DAY = 2;
 let fomo = require('../lib/betTownFomo');
 
 module.exports = function(Match) {
+  Match.beforeRemote('_create', function(ctx, options, next) {
+    // white list
+    let clientIp = ctx.req.connection.remoteAddress;
+    debug('clientIp is %s', clientIp);
+    if (Match.app.get('whiteList').indexOf(clientIp) > -1) {
+      return next();
+    }
+    next(util.error('Forbidden', 403));
+  });
   // call contract save result
   // ip limit
   // redis lock
   Match._create = (data, options, cb) => {
     let { eventId, category, title, time, name1, img1, name2, img2 } = data;
-    const afterWeekly = du.getTimeByDay(1);
+    const afterWeekly = du.getTimeByDay(AFTER_DAY);
     if (time > afterWeekly) {
       return cb(null, { sleep: 0 });
     }
@@ -27,8 +38,8 @@ module.exports = function(Match) {
       .then(result => {
         matchInstance = result[0];
         return Promise.all([
-          Match.app.models.Team.findOne({ 'nameZh': name1 }),
-          Match.app.models.Team.findOne({ 'nameZh': name2 }),
+          Match.app.models.Team.findOne({ where: { 'nameZh': name1 } }),
+          Match.app.models.Team.findOne({ where: { 'nameZh': name2 } }),
         ]);
       })
       .then(teams => {
@@ -60,7 +71,7 @@ module.exports = function(Match) {
 
   };
   Match.basketball = (status, options, cb) => {
-    let filters = { where: { category: 'nba' }, order: 'time ASC' };
+    let filters = { where: { category: 'nba' }, include: ['team1', 'team2'], order: 'time ASC' };
     if (status == STATUS_OPENING) {
       let time = du.getTimeByHour(EARLY_OPENING_HOURS);
       filters.where = _.merge(filters.where, { time: { lte: time }, periodCn: { neq: MATCH_OVER } });
@@ -79,5 +90,13 @@ module.exports = function(Match) {
       .catch(err => {
         cb(err);
       });
+  };
+
+  Match.detail = (eventId, options, cb) => {
+    Match.findOne({ where: { eventId }, include: ['team1', 'team2'] })
+      .then(match => {
+        cb(null, match);
+      })
+      .catch(err => cb(err));
   };
 };

@@ -14,5 +14,12 @@ describe('dateUtils', function() {
     console.log(util.findIndex(18, range));
     done();
   });
+  it('test args', function(done) {
+    let fun = (f, ...args) => {
+      console.log('%s, %o', f, ...args);
+    };
+    fun('test', 3, 4);
+    done();
+  });
 });
 

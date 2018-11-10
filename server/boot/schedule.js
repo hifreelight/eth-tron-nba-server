@@ -8,6 +8,7 @@ const DateUtils = require('../lib/dateUtils');
 let du = new DateUtils();
 const redis = require('../lib/ioredis');
 const util = require('../lib/util');
+const moment = require('moment');
 
 module.exports = async function(app) {
   schedule.scheduleJob('*/10 * * * * *', curl);
@@ -54,14 +55,14 @@ module.exports = async function(app) {
         if (response) {
           return app.models.Match.findOne({ where: { eventId } });
         } else {
-          return Promise.reject('eventId : %d has settle', eventId);
+          return Promise.reject(`eventId : ${eventId} has settle`);
         }
       })
       .then(_match => {
         match = _match;
         return Promise.all([
-          Match.app.models.Team.findOne({ 'nameZh': match.name1 }),
-          Match.app.models.Team.findOne({ 'nameZh': match.name2 }),
+          app.models.Team.findOne({ where: { 'nameZh': match.name1 } }),
+          app.models.Team.findOne({ where: { 'nameZh': match.name2 } }),
         ]);
       })
       .then(teams => {
@@ -81,6 +82,8 @@ module.exports = async function(app) {
           console.error('winTeamIndex invalid');
           return;
         }
+        debug('eventId : %d, gameId: %d, winTeamIndex: %d, comment: %s, deadline: %d',
+        eventId, match.gameId, winTeamIndex, comment, deadline);
 
         fomo.settleGame(match.gameId, winTeamIndex, comment, deadline)
             .then(data => {
@@ -93,6 +96,9 @@ module.exports = async function(app) {
                 console.error(err);
               }
             });
+      })
+      .catch(err => {
+        console.error(err);
       });
   }
   function curl() {
@@ -115,9 +121,9 @@ module.exports = async function(app) {
                 if (!match) {
                   return;
                 }
-                debug('score data r is %O', r);
+                // debug('score data r is %O', r);
                 // 第4节\n09:56
-                if (r.periodCn.indexOf('第4节\n08') > -1) {
+                if (r.periodCn.indexOf('第4节\n10') > -1) {
                   debug('call contract closeGame');
                   closeGame(l.id);
                 }

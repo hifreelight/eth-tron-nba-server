@@ -10,7 +10,8 @@ let moment = require('moment');
 
 describe('A suite for fomo', function() {
   it('test createGame', function() {
-    fomo.createGame('130842', ['Rocket', 'Thund'])
+    fomo.createGame('ten', ['Rocket1', 'Rocket2', 'Rocket3', '4', '5',
+      'Thund1', 'Thund2', 'Thund3', 'Thund4', 'Thund5'])
       .then(response => {
         console.log('test createGame response is %o', response);
         // console.log(fomo.web3.utils.hexToBytes(response.logs[0].data));
@@ -56,7 +57,7 @@ describe('A suite for fomo', function() {
   });
   it('test activate', function() {
     let startTime = moment().unix();
-    fomo.activate(3, startTime)
+    fomo.activate(1, startTime)
       .then(data => {
         console.log(data);
       })
@@ -78,6 +79,30 @@ describe('A suite for fomo', function() {
     let deadline = moment().unix() + 3600 * 36;
     let comment = '76er vs huo 115:100';
     fomo.settleGame(3, 0, comment, deadline)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  });
+  it('test some settleGame', function() {
+    let deadline = 1541865050;
+    let comment = '76er vs 76er 80:98';
+    fomo.settleGame(15, 1, comment, deadline)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  });
+  it('test buy', function() {
+    let value = fomo.web3.utils.toWei('0.1', 'ether');
+    let _gameID = 1;
+    let _teamEth = [value, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    let comment = 'test';
+    fomo.buysXid(_gameID, _teamEth, 0, comment, value)
       .then(data => {
         console.log(data);
       })
