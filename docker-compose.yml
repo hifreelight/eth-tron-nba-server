@@ -2,7 +2,7 @@ version: '2'
 
 services:
   svc-rand:
-    image: svc-rand:lastest
+    image: svc-rand:latest
     ports:
       - "2005:2005"
     environment:
