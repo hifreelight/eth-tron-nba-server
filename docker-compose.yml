@@ -4,21 +4,21 @@ services:
   svc-rand:
     image: svc-rand:lastest
     ports:
-        - "2005:2005"
-      environment:
-        - NODE_ENV=staging
-        - DEBUG=rand:*
-        - FOMO_ADDRESS=
-        - FOMO_OWNER=
-        - FOMO_ACTIVE_ADDRESS=
-        - FOMO_ACTIVE_PRIVATE_KEY=
-        - REDIS_IP=127.0.0.1
-        - REDIS_PORT=6379
-        - REDIS_PWD=bettown2ol8
-        - DB_HOST=127.0.0.1
-        - DB_PORT=27017
-        - DB_USER=root
-        - DB_PWD=bettown2ol8
-        - DB_NAME=rand-staging
-      volumes:
-        - /srv/docker/svc-rand/:/app/
+      - "2005:2005"
+    environment:
+      - NODE_ENV=staging
+      - DEBUG=rand:*
+      - FOMO_ADDRESS=
+      - FOMO_OWNER=
+      - FOMO_ACTIVE_ADDRESS=
+      - FOMO_ACTIVE_PRIVATE_KEY=
+      - REDIS_IP=127.0.0.1
+      - REDIS_PORT=6379
+      - REDIS_PWD=bettown2ol8
+      - DB_HOST=127.0.0.1
+      - DB_PORT=27017
+      - DB_USER=root
+      - DB_PWD=bettown2ol8
+      - DB_NAME=rand-staging
+    volumes:
+      - /srv/docker/svc-rand/:/app/
