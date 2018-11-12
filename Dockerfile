@@ -1,2 +1,2 @@
-FROM registry.cn-hangzhou.aliyuncs.com/zizai/svc-base
+FROM registry.cn-beijing.aliyuncs.com/zizai/svc-base:8-alpine
 EXPOSE 2005
