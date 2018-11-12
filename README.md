@@ -48,6 +48,19 @@ ip限制 √
 详情 √
 是否激活、是否关闭、是否结算
 
+## Q&A
+
+q:
+Error: connection not open
+a:...
+
+q:
+Error: Returned error: replacement transaction underpriced
+a:...
+
+q:
+Error: CONNECTION ERROR: Couldn't connect to node on WS.
+
 [return function value instead of transaction receipt with web3](https://ethereum.stackexchange.com/questions/58228/return-function-value-instead-of-transaction-receipt-with-web3)
 
 https://api.etherscan.io/api?module=proxy&action=eth_getBlockByNumber&tag=latest&boolean=true

@@ -122,8 +122,9 @@ module.exports = async function(app) {
                   return;
                 }
                 // debug('score data r is %O', r);
-                // 第4节\n09:56
-                if (r.periodCn.indexOf('第4节\n10') > -1) {
+                // 第4节\n09:56 第4节↵07:26
+                if (r.periodCn.indexOf('第4节\n06') > -1 ||
+                r.periodCn.indexOf('第4节↵10') > -1) {
                   debug('call contract closeGame');
                   closeGame(l.id);
                 }

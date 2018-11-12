@@ -11,7 +11,7 @@ const STATUS_COMING = 'coming';
 const STATUS_OVER = 'over';
 const MATCH_OVER = '完赛';
 const EARLY_OPENING_HOURS = 24;
-const AFTER_DAY = 2;
+const AFTER_DAY = 3;
 let fomo = require('../lib/betTownFomo');
 
 module.exports = function(Match) {
