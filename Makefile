@@ -1,11 +1,11 @@
 build:
-  docker build -t svc-rand .
+	docker build -t svc-rand .
 push:
-  docker push svc-rand
+	docker push svc-rand
 start:
-  docker-compose up -d
+	docker-compose up -d
 restart:
-  docker-compose down
-  docker-compose up -d
+	docker-compose down
+	docker-compose up -d
 logs:
-  docker-compose logs -f svc-rand
+	docker-compose logs -f svc-rand
