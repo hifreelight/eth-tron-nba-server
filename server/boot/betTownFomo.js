@@ -32,7 +32,7 @@ module.exports = function(app) {
     let gameId = event.returnValues.gameID;
     let timestamp = parseInt(event.returnValues.timestamp);
     if (timestamp + 3600 < du.getCurrentTimestamp()) {
-      debug('past event gameId is %d, timestamp: %s', gameId, timestamp);
+      debug('onGameCreated past event gameId is %d, timestamp: %s', gameId, timestamp);
       return;
     }
     fomo.getGame(gameId)
@@ -54,11 +54,47 @@ module.exports = function(app) {
         }
       })
       .catch(err => {
+        console.error('onGameCreated getGame err is %o', err);
+      });
+  })
+  .on('changed', function(event) {
+    // remove event from local database
+  })
+  .on('error', function(err) {
+    console.error('onGameCreated err is %o', err);
+  });
+
+  fomo.contract.events.onGameActivated({
+    filter: {},
+    fromBlock: 0,
+  }, function(error, event) {
+  })
+  .on('data', function(event) {
+    debug('onGameActivated data is %o', event);
+    let gameId = event.returnValues.gameID;
+    let timestamp = parseInt(event.returnValues.timestamp);
+    if (timestamp + 3600 < du.getCurrentTimestamp()) {
+      debug('onGameActivated past event gameId is %d, timestamp: %s', gameId, timestamp);
+      return;
+    }
+    app.models.Match.findOne({ where: { gameId } })
+      .then(match => {
+        if (!match) {
+          debug('onGameActivated gameId : %d not in db', gameId);
+          return;
+        }
+        if (!match.isActivate) {
+          match.updateAttributes({ isActivate: 1 });
+        }
+      })
+      .catch(err => {
         console.error(err);
       });
   })
   .on('changed', function(event) {
     // remove event from local database
   })
-  .on('error', console.error);
+  .on('error', function(err) {
+    console.error('onGameActivated err is %d', err);
+  });
 };

@@ -74,14 +74,14 @@ module.exports = function(Match) {
     let filters = { where: { category: 'nba' }, include: ['team1', 'team2'], order: 'time ASC' };
     if (status == STATUS_OPENING) {
       let time = du.getTimeByHour(EARLY_OPENING_HOURS);
-      filters.where = _.merge(filters.where, { time: { lte: time }, periodCn: { neq: MATCH_OVER } });
+      filters.where = _.merge(filters.where, { time: { lte: time }, periodCn: { neq: MATCH_OVER }, isActivate: 1 });
     }
     if (status == STATUS_COMING) {
       let time = du.getTimeByHour(EARLY_OPENING_HOURS);
       filters.where = _.merge(filters.where, { time: { gt: time } });
     }
     if (status == STATUS_OVER) {
-      filters.where = _.merge(filters.where, { periodCn: MATCH_OVER });
+      filters.where = _.merge(filters.where, { periodCn: MATCH_OVER, isActivate: 1 });
     }
     Match.find(filters)
       .then(respones => {

@@ -17,7 +17,8 @@ module.exports = function(app) {
       team.teamEn = value[2];
       team.nameEn = value[3];
       team.teamKor = value[4];
-      team.icon = value[5];
+      team.nameKor = value[5];
+      team.icon = value[6];
       let valid = true;
       for (let k in team) {
         if (!team[k]) {
@@ -26,7 +27,14 @@ module.exports = function(app) {
       }
       if (valid) {
         try {
-          await app.models.Team.findOrCreate({ where: { nameZh: team.nameZh } }, team);
+          await app.models.Team.findOne({ where: { nameZh: team.nameZh } })
+            .then(_team => {
+              if (_team) {
+                _team.updateAttributes(team);
+              } else {
+                app.models.Team.create(team);
+              }
+            });
         } catch (err) {
           console.error(err);
         }

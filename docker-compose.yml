@@ -3,6 +3,9 @@ version: '2'
 services:
   svc-rand:
     image: svc-rand:latest
+    links:
+      - mongodb
+      - redis
     ports:
       - "2005:2005"
     environment:

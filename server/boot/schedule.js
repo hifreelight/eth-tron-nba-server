@@ -19,11 +19,14 @@ module.exports = async function(app) {
         if (response) {
           return app.models.Match.findOne({ where: { eventId } });
         } else {
-          return Promise.reject('eventId : %d has close', eventId);
+          return Promise.reject(`eventId : ${eventId} has close`);
         }
       })
       .then(match => {
         let closeTime = du.getCurrentTimestamp();
+        if (!match || !match.gameId) {
+          return Promise.reject(`eventId : ${eventId} not create`);
+        }
         return fomo.setCloseTime(match.gameId, closeTime);
       })
       .then(data => {
@@ -33,7 +36,7 @@ module.exports = async function(app) {
         if (typeof err === 'string') {
           debug('closeGame err is %s', err);
         } else {
-          console.error(err);
+          console.error('close game err is %o', err);
         }
       });
   }
@@ -93,12 +96,12 @@ module.exports = async function(app) {
               if (typeof err === 'string') {
                 debug('settleGame err is %s', err);
               } else {
-                console.error(err);
+                console.error('settleGame err is %o', err);
               }
             });
       })
       .catch(err => {
-        console.error(err);
+        console.error('settle game err is %o', err);
       });
   }
   function curl() {
@@ -136,6 +139,9 @@ module.exports = async function(app) {
               });
           }
         }
+      })
+      .catch(err => {
+        console.error('curl err is %o', err);
       });
   }
 };

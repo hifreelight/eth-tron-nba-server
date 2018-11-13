@@ -62,6 +62,10 @@
     "isCreated":{
       "type": "number",
       "default": 0
+    },
+    "isActivate":{
+      "type": "number",
+      "default": 0
     }
   },
   "validations": [],
