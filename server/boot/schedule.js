@@ -63,6 +63,12 @@ module.exports = async function(app) {
       })
       .then(_match => {
         match = _match;
+        if (!match.gameId) {
+          return Promise.reject(`eventId : ${eventId} has not create`);
+        }
+        if (!match.isActivate) {
+          return Promise.reject(`eventId : ${eventId} has not activate`);
+        }
         return Promise.all([
           app.models.Team.findOne({ where: { 'nameZh': match.name1 } }),
           app.models.Team.findOne({ where: { 'nameZh': match.name2 } }),
@@ -74,11 +80,13 @@ module.exports = async function(app) {
         let comment = `${team1.nameEn} vs ${team2.nameEn} ${scores.score1}:${scores.score2}`;
         let range = [1, 5, 8, 12, 18, 100];
         let winTeamIndex = null;
-        if (scores.score1 > scores.score2) {
-          const diff = scores.score1 - scores.score2;
+        let score1 = parseInt(scores.score1);
+        let score2 = parseInt(scores.score2);
+        if (score1 > score2) {
+          const diff = score1 - score2;
           winTeamIndex = util.findIndex(diff, range);
         } else {
-          const diff = scores.score2 - scores.score1;
+          const diff = score2 - score1;
           winTeamIndex = util.findIndex(diff, range) + 5;
         }
         if (!winTeamIndex) {

@@ -70,6 +70,18 @@ a:...
 q:
 Error: CONNECTION ERROR: Couldn't connect to node on WS.
 
+
+
+2018-11-13T10:28:45.495Z rand:boot:betTownFomo fomo getGame data is Result { '0': '', '1': '0', '2': '0', '3': false, '4': false, '5': false, '6': '0', '7': '0', '8': '', '9': '0', name: '', numberOfTeams: '0', gameStartTime: '0', paused: false, ended: false, canceled: false, winnerTeam: '0', withdrawDeadline: '0', gameEndComment: '', closeTime: '0' }
+2018-11-13T10:28:45.496Z rand:boot:betTownFomo gameId : 16 not in db
+2018-11-14T01:53:00.090Z rand:schedule call contract closeGame
+2018-11-14T01:53:01.670Z rand:lib:betTownFomo fun: setCloseTime, args: 3 1542160381
+2018-11-14T01:53:02.948Z rand:lib:betTownFomo pubWeb3Provider WS closed
+2018-11-14T01:53:02.948Z rand:lib:betTownFomo Attempting to reconnect...
+2018-11-14T01:53:04.082Z rand:lib:betTownFomo WS connected.
+2018-11-14T01:53:10.106Z rand:schedule call contract closeGame
+2018-11-14T01:53:10.221Z rand:schedule closeGame err is eventId : 130878 has close
+2018-11-14T01:53:20.095Z rand:schedule call contract closeGame
 ## contract
 0x21f8aaf0e90f8a675dd512D83A0C926658e8E77e  
 Bank
