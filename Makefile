@@ -9,3 +9,5 @@ restart:
 	docker-compose up -d
 logs:
 	docker-compose logs -f svc-rand
+exec:
+  docker-compose exec svc-rand sh

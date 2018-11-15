@@ -18,6 +18,7 @@ module.exports = function(Match) {
   Match.beforeRemote('_create', function(ctx, options, next) {
     // white list
     let clientIp = ctx.req.connection.remoteAddress;
+    clientIp = ctx.req.headers['x-real-ip'] || clientIp;
     debug('clientIp is %s', clientIp);
     if (Match.app.get('whiteList').indexOf(clientIp) > -1) {
       return next();
