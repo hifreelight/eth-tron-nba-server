@@ -41,6 +41,9 @@ class BetTownFomo extends EventEmitter {
     let provider = this.provider;
     debug('WS connected.');
     provider.on('error', e => console.error('pubWeb3Provider WS Error', e));
+    provider.on('disconnect', () => {
+      debug('WS disconnect.');
+    });
     provider.on('end', e => {
       debug('pubWeb3Provider WS closed');
       debug('Attempting to reconnect...');
