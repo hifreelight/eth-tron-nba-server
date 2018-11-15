@@ -2,6 +2,7 @@
 
 const debug = require('debug')('rand:lib:betTownFomo');
 const Web3 = require('web3');
+const EventEmitter = require('events').EventEmitter;
 const apiKey = 'VUQN99VRVQB728EHQX9QKEF1SVQNFJ3P42';
 const isProd = process.env.NODE_ENV == 'production' ? true : false;
 let httpUrl = isProd ? 'https://mainnet.infura.io/' + apiKey : 'https://ropsten.infura.io/' + apiKey;
@@ -24,8 +25,9 @@ let contracts = {
 let { address, owner, activeAddress, activePrivateKey } = contracts.Fomo;
 let fomoContract = new web3.eth.Contract(require('../../contracts/Fomo').abi, address, { from: owner });
 
-class BetTownFomo {
+class BetTownFomo extends EventEmitter {
   constructor() {
+    super();
     this.web3 = web3;
     this.contract = fomoContract;
     this.provider = this.web3.currentProvider;
@@ -47,6 +49,7 @@ class BetTownFomo {
 
       provider.on('connect', self.connect.bind(self));
       self.web3.setProvider(provider);
+      self.emit('fomo listning', self);
     });
   }
   async createGame(name, teamNames) {

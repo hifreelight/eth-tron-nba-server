@@ -23,6 +23,4 @@ services:
       - DB_USER=root
       - DB_PWD=bettown2ol8
       - DB_NAME=rand-staging
-      - WHITE_LIST=172.22.0.1,127.0.0.1
-    volumes:
-      - /srv/docker/svc-rand/:/app/
+      - WHITE_LIST=172.22.0.1,127.0.0.1,172.23.0.1
