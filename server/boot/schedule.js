@@ -76,7 +76,7 @@ module.exports = async function(app) {
       })
       .then(teams => {
         let [team1, team2] = teams;
-        let deadline = moment().unix() + 3600 * 36;
+        let deadline = moment().unix() + 3600 * 48;
         let comment = `${team1.nameEn} vs ${team2.nameEn} ${scores.score1}:${scores.score2}`;
         let range = [1, 5, 8, 12, 18, 100];
         let winTeamIndex = null;
@@ -133,8 +133,8 @@ module.exports = async function(app) {
                   return;
                 }
                 // debug('score data r is %O', r);
-                // 第4节\n09:56 第4节↵07:26
-                if (r.periodCn.indexOf('第4节\n06') > -1 ||
+                // 第4节\n09:56 第4节↵07:26 第4节↵08:56
+                if (r.periodCn.indexOf('第4节\n10') > -1 ||
                 r.periodCn.indexOf('第4节↵10') > -1) {
                   debug('call contract closeGame');
                   closeGame(l.id);
