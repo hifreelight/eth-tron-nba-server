@@ -8,7 +8,7 @@ module.exports = function(app) {
   let activateTimer = function(gameId, matchTime) {
     let now = du.getCurrentTimestamp();
     let matchTs = du.string2timestamp(matchTime);
-    let startTime = matchTs - 3600 * 24;
+    let startTime = matchTs - 3600 * 24 - 3600 * 8;
     let time = now < startTime ? startTime - now : 0;
     debug('gameId: %d, now: %d, matchTs: %d, startTime: %d, time: %d', gameId, now, matchTs, startTime, time);
     setTimeout(function() {

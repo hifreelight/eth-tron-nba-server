@@ -76,6 +76,7 @@ module.exports = function(Match) {
     if (status == STATUS_OPENING) {
       let time = du.getTimeByHour(EARLY_OPENING_HOURS);
       filters.where = _.merge(filters.where, { time: { lte: time }, periodCn: { neq: MATCH_OVER }, isActivate: 1 });
+      filters.order = 'time DESC';
     }
     if (status == STATUS_COMING) {
       let time = du.getTimeByHour(EARLY_OPENING_HOURS);
