@@ -10,7 +10,7 @@ let moment = require('moment');
 
 describe('A suite for fomo', function() {
   this.timeout(1000 * 120);
-  let gameId = 12;
+  let gameId = 61;
   let createGame = () => {
     fomo.createGame('ten', ['Rocket1', 'Rocket2', 'Rocket3', '4', '5',
       'Thund1', 'Thund2', 'Thund3', 'Thund4', 'Thund5'])

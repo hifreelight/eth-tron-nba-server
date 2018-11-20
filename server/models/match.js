@@ -84,6 +84,7 @@ module.exports = function(Match) {
     if (status == STATUS_OVER) {
       filters.where = _.merge(filters.where, { periodCn: MATCH_OVER, isActivate: 1 });
       filters.order = 'time DESC';
+      filters.limit = 50;
     }
     Match.find(filters)
       .then(respones => {
