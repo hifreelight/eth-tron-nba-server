@@ -50,7 +50,7 @@ module.exports = function(app) {
           if (!match.isCreated) {
             match.updateAttributes({ isCreated: 1, gameId });
           }
-          if (du.string2timestamp(match.time) > du.getCurrentTimestamp()) {
+          if (!match.isActivate && du.string2timestamp(match.time) > du.getCurrentTimestamp()) {
             activateTimer(gameId, match.time);
           }
         })
