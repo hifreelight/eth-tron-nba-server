@@ -66,6 +66,17 @@
     "isActivate":{
       "type": "number",
       "default": 0
+    },
+    "tronGameId": {
+      "type": "number"
+    },
+    "tronIsCreated":{
+      "type": "number",
+      "default": 0
+    },
+    "tronIsActivate":{
+      "type": "number",
+      "default": 0
     }
   },
   "validations": [],
@@ -115,6 +126,11 @@
     },
     "basketball": {
       "accepts": [
+        {
+          "arg": "coin",
+          "type": "string",
+          "description": "币种：eth, tron, 默认eth"
+        },
         {
           "arg": "status",
           "type": "string",

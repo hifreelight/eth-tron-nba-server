@@ -1,0 +1,837 @@
+{
+  "contractName": "FomoTron",
+  "abi": [
+    {
+      "outputs": [
+        {
+          "type": "bytes32"
+        },
+        {
+          "type": "uint256[]"
+        },
+        {
+          "type": "uint256[]"
+        },
+        {
+          "type": "uint256[]"
+        },
+        {
+          "type": "uint256[]"
+        }
+      ],
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "_pID",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPlayerStatus",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "type": "uint256"
+        },
+        {
+          "type": "uint256[]"
+        }
+      ],
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "_keys",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "getBuyPrices",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "type": "uint256"
+        },
+        {
+          "type": "bytes32[]"
+        },
+        {
+          "type": "uint256[]"
+        },
+        {
+          "type": "uint256[]"
+        },
+        {
+          "type": "uint256[]"
+        }
+      ],
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        }
+      ],
+      "name": "getGameStatus",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "type": "uint256"
+        }
+      ],
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "_team",
+          "type": "uint256"
+        },
+        {
+          "name": "_eth",
+          "type": "uint256"
+        }
+      ],
+      "name": "getKeysfromETH",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "_paused",
+          "type": "bool"
+        }
+      ],
+      "name": "pauseGame",
+      "stateMutability": "Nonpayable",
+      "type": "Function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "banker",
+          "type": "address"
+        }
+      ],
+      "name": "transferBanker",
+      "stateMutability": "Nonpayable",
+      "type": "Function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        }
+      ],
+      "name": "withdraw",
+      "stateMutability": "Nonpayable",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "type": "uint256"
+        }
+      ],
+      "constant": true,
+      "name": "gameIDIndex_",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        }
+      ],
+      "name": "clearFund",
+      "stateMutability": "Nonpayable",
+      "type": "Function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "_comment",
+          "type": "string"
+        },
+        {
+          "name": "_deadline",
+          "type": "uint256"
+        }
+      ],
+      "name": "cancelGame",
+      "stateMutability": "Nonpayable",
+      "type": "Function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "_closeTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "setCloseTime",
+      "stateMutability": "Nonpayable",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "type": "uint256"
+        }
+      ],
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "_pID",
+          "type": "uint256"
+        },
+        {
+          "name": "_team",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPlayerInstWinning",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "payable": true,
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "_teamEth",
+          "type": "uint256[]"
+        },
+        {
+          "name": "_affCode",
+          "type": "uint256"
+        }
+      ],
+      "name": "buysXid",
+      "stateMutability": "Payable",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "type": "address"
+        }
+      ],
+      "constant": true,
+      "name": "owner",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "_startTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "activate",
+      "stateMutability": "Nonpayable",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "type": "address"
+        }
+      ],
+      "constant": true,
+      "name": "dev",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "name": "name",
+          "type": "string"
+        },
+        {
+          "name": "numberOfTeams",
+          "type": "uint256"
+        },
+        {
+          "name": "gameStartTime",
+          "type": "uint256"
+        },
+        {
+          "name": "paused",
+          "type": "bool"
+        },
+        {
+          "name": "ended",
+          "type": "bool"
+        },
+        {
+          "name": "canceled",
+          "type": "bool"
+        },
+        {
+          "name": "winnerTeam",
+          "type": "uint256"
+        },
+        {
+          "name": "withdrawDeadline",
+          "type": "uint256"
+        },
+        {
+          "name": "gameEndComment",
+          "type": "string"
+        },
+        {
+          "name": "closeTime",
+          "type": "uint256"
+        }
+      ],
+      "constant": true,
+      "inputs": [
+        {
+          "type": "uint256"
+        }
+      ],
+      "name": "game_",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "type": "uint256"
+        }
+      ],
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "_pID",
+          "type": "uint256"
+        },
+        {
+          "name": "_team",
+          "type": "uint256"
+        }
+      ],
+      "name": "getPlayerPotWinning",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "name": "eth",
+          "type": "uint256"
+        },
+        {
+          "name": "withdrawn",
+          "type": "bool"
+        }
+      ],
+      "constant": true,
+      "inputs": [
+        {
+          "type": "uint256"
+        },
+        {
+          "type": "uint256"
+        }
+      ],
+      "name": "players_",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "newDev",
+          "type": "address"
+        }
+      ],
+      "name": "setDev",
+      "stateMutability": "Nonpayable",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "type": "string"
+        }
+      ],
+      "constant": true,
+      "name": "name_",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "name": "totalEth",
+          "type": "uint256"
+        },
+        {
+          "name": "totalWithdrawn",
+          "type": "uint256"
+        },
+        {
+          "name": "winningVaultInst",
+          "type": "uint256"
+        },
+        {
+          "name": "winningVaultFinal",
+          "type": "uint256"
+        },
+        {
+          "name": "fundCleared",
+          "type": "bool"
+        }
+      ],
+      "constant": true,
+      "inputs": [
+        {
+          "type": "uint256"
+        }
+      ],
+      "name": "gameStatus_",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "_team",
+          "type": "uint256"
+        },
+        {
+          "name": "_comment",
+          "type": "string"
+        },
+        {
+          "name": "_deadline",
+          "type": "uint256"
+        }
+      ],
+      "name": "settleGame",
+      "stateMutability": "Nonpayable",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "type": "uint256"
+        },
+        {
+          "type": "uint256[]"
+        }
+      ],
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "_eths",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "getKeysFromETHs",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "stateMutability": "Nonpayable",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "type": "uint256"
+        }
+      ],
+      "inputs": [
+        {
+          "name": "_name",
+          "type": "string"
+        },
+        {
+          "name": "_teamNames",
+          "type": "bytes32[]"
+        }
+      ],
+      "name": "createGame",
+      "stateMutability": "Nonpayable",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "name": "name",
+          "type": "bytes32"
+        },
+        {
+          "name": "keys",
+          "type": "uint256"
+        },
+        {
+          "name": "eth",
+          "type": "uint256"
+        },
+        {
+          "name": "mask",
+          "type": "uint256"
+        },
+        {
+          "name": "dust",
+          "type": "uint256"
+        }
+      ],
+      "constant": true,
+      "inputs": [
+        {
+          "type": "uint256"
+        },
+        {
+          "type": "uint256"
+        }
+      ],
+      "name": "teams_",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "name": "keys",
+          "type": "uint256"
+        },
+        {
+          "name": "eth",
+          "type": "uint256"
+        },
+        {
+          "name": "mask",
+          "type": "uint256"
+        }
+      ],
+      "constant": true,
+      "inputs": [
+        {
+          "type": "uint256"
+        },
+        {
+          "type": "uint256"
+        },
+        {
+          "type": "uint256"
+        }
+      ],
+      "name": "playerTeams_",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "outputs": [
+        {
+          "type": "uint256"
+        }
+      ],
+      "constant": true,
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "_team",
+          "type": "uint256"
+        },
+        {
+          "name": "_keys",
+          "type": "uint256"
+        }
+      ],
+      "name": "getBuyPrice",
+      "stateMutability": "View",
+      "type": "Function"
+    },
+    {
+      "inputs": [
+        {
+          "name": "book_addr",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "Nonpayable",
+      "type": "Constructor"
+    },
+    {
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "onGameCreated",
+      "type": "Event"
+    },
+    {
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "startTime",
+          "type": "uint256"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "onGameActivated",
+      "type": "Event"
+    },
+    {
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "paused",
+          "type": "bool"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "onGamePaused",
+      "type": "Event"
+    },
+    {
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "closeTimestamp",
+          "type": "uint256"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "onChangeCloseTime",
+      "type": "Event"
+    },
+    {
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "gameID",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "name": "playerID",
+          "type": "uint256"
+        },
+        {
+          "name": "playerAddress",
+          "type": "address"
+        },
+        {
+          "name": "playerName",
+          "type": "bytes32"
+        },
+        {
+          "name": "teamID",
+          "type": "uint256"
+        },
+        {
+          "name": "ethIn",
+          "type": "uint256"
+        },
+        {
+          "name": "keysBought",
+          "type": "uint256"
+        },
+        {
+          "name": "affID",
+          "type": "uint256"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "onPurchase",
+      "type": "Event"
+    },
+    {
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "gameID",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "name": "playerID",
+          "type": "uint256"
+        },
+        {
+          "name": "playerAddress",
+          "type": "address"
+        },
+        {
+          "name": "playerName",
+          "type": "bytes32"
+        },
+        {
+          "name": "ethOut",
+          "type": "uint256"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "onWithdraw",
+      "type": "Event"
+    },
+    {
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "winningTeamID",
+          "type": "uint256"
+        },
+        {
+          "name": "comment",
+          "type": "string"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "onGameEnded",
+      "type": "Event"
+    },
+    {
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "comment",
+          "type": "string"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "onGameCancelled",
+      "type": "Event"
+    },
+    {
+      "inputs": [
+        {
+          "indexed": true,
+          "name": "gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "fundCleared",
+          "type": "uint256"
+        },
+        {
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "name": "onFundCleared",
+      "type": "Event"
+    }
+  ]
+}

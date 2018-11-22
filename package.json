@@ -28,6 +28,7 @@
     "seedrandom": "^2.4.3",
     "serve-favicon": "^2.0.1",
     "strong-error-handler": "^1.0.1",
+    "tronweb": "^2.1.6",
     "web3": "^1.0.0-beta.36"
   },
   "devDependencies": {

@@ -4,6 +4,7 @@ const zhibo = require('../lib/zhibo');
 const debug = require('debug')('rand:schedule');
 const MATCH_OVER = '完赛';
 const fomo = require('../lib/betTownFomo');
+const fomoTron = require('../lib/betTownFomoTron');
 const DateUtils = require('../lib/dateUtils');
 let du = new DateUtils();
 const redis = require('../lib/ioredis');
@@ -27,7 +28,10 @@ module.exports = async function(app) {
         if (!match || !match.gameId) {
           return Promise.reject(`eventId : ${eventId} not create`);
         }
-        return fomo.setCloseTime(match.gameId, closeTime);
+        return Promise.all([
+          fomo.setCloseTime(match.gameId, closeTime),
+          fomoTron.setCloseTime(match.gameId, closeTime),
+        ]);
       })
       .then(data => {
         debug('eventId : %d close data is %o', eventId, data);
@@ -89,7 +93,7 @@ module.exports = async function(app) {
           const diff = score2 - score1;
           winTeamIndex = util.findIndex(diff, range) + 5;
         }
-        if (!winTeamIndex) {
+        if (isNaN(winTeamIndex)) {
           console.error('winTeamIndex invalid');
           return;
         }
@@ -97,16 +101,27 @@ module.exports = async function(app) {
         eventId, match.gameId, winTeamIndex, comment, deadline);
 
         fomo.settleGame(match.gameId, winTeamIndex, comment, deadline)
-            .then(data => {
-              debug('eventId : %d settle data is %o', eventId, data);
-            })
-            .catch(err => {
-              if (typeof err === 'string') {
-                debug('settleGame err is %s', err);
-              } else {
-                console.error('settleGame err is %o', err);
-              }
-            });
+          .then(data => {
+            debug('eventId : %d settle data is %o', eventId, data);
+          })
+          .catch(err => {
+            if (typeof err === 'string') {
+              debug('settleGame err is %s', err);
+            } else {
+              console.error('settleGame err is %o', err);
+            }
+          });
+        fomoTron.settleGame(match.gameId, winTeamIndex, comment, deadline)
+          .then(data => {
+            debug('eventId : %d settle data is %o', eventId, data);
+          })
+          .catch(err => {
+            if (typeof err === 'string') {
+              debug('settleGame err is %s', err);
+            } else {
+              console.error('settleGame err is %o', err);
+            }
+          });
       })
       .catch(err => {
         console.error('settle game err is %o', err);

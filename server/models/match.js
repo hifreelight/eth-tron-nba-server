@@ -13,6 +13,7 @@ const MATCH_OVER = '完赛';
 const EARLY_OPENING_HOURS = 24;
 const AFTER_DAY = 3;
 let fomo = require('../lib/betTownFomo');
+const fomoTron = require('../lib/betTownFomoTron');
 
 module.exports = function(Match) {
   Match.beforeRemote('_create', function(ctx, options, next) {
@@ -64,6 +65,13 @@ module.exports = function(Match) {
           .catch(err => {
             console.error('fomo createGame err is %o', err);
           });
+        fomoTron.createGame(eventId + '', _teams)
+          .then(response => {
+            debug('createGame response is %o', response);
+          })
+          .catch(err => {
+            console.error('fomo createGame err is %o', err);
+          });
         cb(null, { sleep: 60 });
       })
       .catch(err => cb(err));
@@ -71,18 +79,30 @@ module.exports = function(Match) {
   Match._find = () => {
 
   };
-  Match.basketball = (status, options, cb) => {
+  Match.basketball = (coin, status, options, cb) => {
+    coin = coin || 'eth';
     let filters = { where: { category: 'nba' }, include: ['team1', 'team2'], order: 'time ASC' };
     if (status == STATUS_OPENING) {
       let time = du.getTimeByHour(EARLY_OPENING_HOURS);
-      filters.where = _.merge(filters.where, { time: { lte: time }, periodCn: { neq: MATCH_OVER }, isActivate: 1 });
+
+      filters.where = _.merge(filters.where, { time: { lte: time }, periodCn: { neq: MATCH_OVER } });
+      if (coin == 'eth') {
+        filters.where = _.merge(filters.where, { isActivate: 1 });
+      } else {
+        filters.where = _.merge(filters.where, { TronIsActivate: 1 });
+      }
     }
     if (status == STATUS_COMING) {
       let time = du.getTimeByHour(EARLY_OPENING_HOURS);
       filters.where = _.merge(filters.where, { time: { gt: time } });
     }
     if (status == STATUS_OVER) {
-      filters.where = _.merge(filters.where, { periodCn: MATCH_OVER, isActivate: 1 });
+      filters.where = _.merge(filters.where, { periodCn: MATCH_OVER });
+      if (coin == 'eth') {
+        filters.where = _.merge(filters.where, { isActivate: 1 });
+      } else {
+        filters.where = _.merge(filters.where, { TronIsActivate: 1 });
+      }
       filters.order = 'time DESC';
       filters.limit = 50;
     }
