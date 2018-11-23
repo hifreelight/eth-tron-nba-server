@@ -12,8 +12,8 @@ const web3 = new Web3();
 
 let contracts = {
   Fomo: {
-    address: isProd ? process.env.FOMO_TRON_ADDRESS :  'TGydncTFhU4inD6Y6pJTfJ1149JTCap3uU',
-    owner: isProd ? process.env.FOMO_TRON_OWNER :   'TGydncTFhU4inD6Y6pJTfJ1149JTCap3uU',
+    address: isProd ? process.env.FOMO_TRON_ADDRESS :  'TXEH21FgdzXvKBnUdU2VYB5GGQ26VpPoS6',
+    owner: isProd ? process.env.FOMO_TRON_OWNER :   'TXEH21FgdzXvKBnUdU2VYB5GGQ26VpPoS6',
     activeAddress: isProd ? process.env.FOMO_TRON_ACTIVE_ADDRESS :  'TXAsg1x5Y6mnyx5Z3vsCRNRchMvKwJMUbs',
     activePrivateKey: isProd ? process.env.FOMO_TRON_ACTIVE_PRIVATE_KEY :   '24a1a7e24a956138b0abf0a47cee816bd7180762f2c7df7167925c8c12e8dc98',
   },
@@ -45,14 +45,6 @@ class BetTownFomoTron extends EventEmitter {
       return tronWeb.fromAscii(n);
     });
     console.log('teamNames is %O', teamNames);
-    // return this.contract.createGame(name, teamNames)
-    //   .send({
-    //     shouldPollResponse: true,
-    //     callValue: 0,
-    //   })
-    //   .then(response => {
-    //     console.log(response);
-    //   });
     return this.send('createGame', name, teamNames);
   }
   async send(fun, ...args) {
@@ -100,38 +92,17 @@ class BetTownFomoTron extends EventEmitter {
   settleGame(gameId, team, comment, deadline) {
     return this.send('settleGame', gameId, team, comment, deadline);
   }
-  async buysXid(_gameID, _teamEth, _affCode, comment, value) {
-    let txBuilder = fomoContract.methods.buysXid(_gameID, _teamEth, _affCode, comment);
-    let encodedTx = txBuilder.encodeABI();
-    let amountOfGas = 4000000;
-    let nonce = await web3.eth.getTransactionCount(activeAddress) + 1;
-    debug('send once is %d', nonce);
-    let transactionObject = {
-      // nonce: nonce,
-      // gasPrice: '20000000000',
-      gas: amountOfGas,
-      data: encodedTx,
-      from: activeAddress,
-      to: address,
-      value,
-    };
-    return web3.eth.accounts.signTransaction(transactionObject, '0x' + activePrivateKey)
-      .then(signedTx => {
-        return web3.eth.sendSignedTransaction(signedTx.rawTransaction, function(error, response) {
-          debug('response is %o', response);
-        })
-          .on('receipt', function(receipt) {
-            debug('receipt is %o', receipt);
-            //do something
-            return receipt;
-          })
-          .catch(err => {
-            console.error('sendSignedTransaction err is %o', err);
-            return err;
-          });
+  async buysXid(_gameID, _teamEth, _affCode, value) {
+    return this.contract.buysXid(_gameID, _teamEth, _affCode)
+      .send({
+        shouldPollResponse: true,
+        callValue: value,
+      })
+      .then(response => {
+        console.log(response);
       })
       .catch(err => {
-        console.error('signTransaction err is %o', err);
+        console.error(err);
       });
   }
   isConnected() {

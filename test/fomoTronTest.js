@@ -8,7 +8,7 @@ let debug = require('debug')('rand:test');
 let moment = require('moment');
 const fomoTron = require('../server/lib/betTownFomoTron');
 
-const gameId = 1;
+const gameId = 2;
 describe('A suite for fomoTron', function() {
   this.timeout(1000 * 30);
   let createGame = () => {
@@ -48,28 +48,25 @@ describe('A suite for fomoTron', function() {
       });
   });
   it('test buy', function(done) {
-    let value = fomo.web3.utils.toWei('0.1', 'ether');
+    let value = fomoTron.tronWeb.toSun(10);
     let _teamEth = [value, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let comment = 'test';
-    fomoTron.buysXid(gameId, _teamEth, 0, comment, value)
+    fomoTron.buysXid(gameId, _teamEth, 0, value)
       .then(data => {
         console.log(data);
-        if (data.status == true) {
-          done();
-        }
+        done();
       })
       .catch(err => {
         console.error(err);
+        done();
       });
   });
   it('test close', function(done) {
     let closeTime = moment().unix() + 10;
-    fomo.setCloseTime(gameId, closeTime)
+    fomoTron.setCloseTime(gameId, closeTime)
       .then(data => {
         console.log(data);
-        if (data.status == true) {
-          done();
-        }
+        done();
       })
       .catch(err => {
         console.error(err);
@@ -78,12 +75,10 @@ describe('A suite for fomoTron', function() {
   it('test settleGame', function(done) {
     let deadline = moment().unix() + 3600 * 36;
     let comment = '76er vs huo 102:100';
-    fomo.settleGame(gameId, 0, comment, deadline)
+    fomoTron.settleGame(gameId, 0, comment, deadline)
       .then(data => {
         console.log(data);
-        if (data.status == true) {
-          done();
-        }
+        done();
       })
       .catch(err => {
         console.error(err);
