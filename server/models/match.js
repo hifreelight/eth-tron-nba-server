@@ -89,7 +89,7 @@ module.exports = function(Match) {
       if (coin == 'eth') {
         filters.where = _.merge(filters.where, { isActivate: 1 });
       } else {
-        filters.where = _.merge(filters.where, { TronIsActivate: 1 });
+        filters.where = _.merge(filters.where, { tronIsActivate: 1 });
       }
     }
     if (status == STATUS_COMING) {
@@ -101,7 +101,7 @@ module.exports = function(Match) {
       if (coin == 'eth') {
         filters.where = _.merge(filters.where, { isActivate: 1 });
       } else {
-        filters.where = _.merge(filters.where, { TronIsActivate: 1 });
+        filters.where = _.merge(filters.where, { tronIsActivate: 1 });
       }
       filters.order = 'time DESC';
       filters.limit = 50;
