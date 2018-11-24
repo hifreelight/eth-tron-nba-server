@@ -8,7 +8,7 @@ let debug = require('debug')('rand:test');
 let moment = require('moment');
 const fomoTron = require('../server/lib/betTownFomoTron');
 
-const gameId = 2;
+const gameId = 39;
 describe('A suite for fomoTron', function() {
   this.timeout(1000 * 30);
   let createGame = () => {
@@ -75,7 +75,7 @@ describe('A suite for fomoTron', function() {
   it('test settleGame', function(done) {
     let deadline = moment().unix() + 3600 * 36;
     let comment = '76er vs huo 102:100';
-    fomoTron.settleGame(gameId, 0, comment, deadline)
+    fomoTron.settleGame(gameId, 3, comment, deadline)
       .then(data => {
         console.log(data);
         done();
