@@ -12,8 +12,8 @@ const web3 = new Web3();
 
 let contracts = {
   Fomo: {
-    address: isProd ? process.env.FOMO_TRON_ADDRESS :  'TXEH21FgdzXvKBnUdU2VYB5GGQ26VpPoS6',
-    owner: isProd ? process.env.FOMO_TRON_OWNER :   'TXEH21FgdzXvKBnUdU2VYB5GGQ26VpPoS6',
+    address: isProd ? process.env.FOMO_TRON_ADDRESS :  'TNJ1aHwt3Ux9bfqoS2f5PgWsYM8LnCEhDn',
+    owner: isProd ? process.env.FOMO_TRON_OWNER :   'TNJ1aHwt3Ux9bfqoS2f5PgWsYM8LnCEhDn',
     activeAddress: isProd ? process.env.FOMO_TRON_ACTIVE_ADDRESS :  'TXAsg1x5Y6mnyx5Z3vsCRNRchMvKwJMUbs',
     activePrivateKey: isProd ? process.env.FOMO_TRON_ACTIVE_PRIVATE_KEY :   '24a1a7e24a956138b0abf0a47cee816bd7180762f2c7df7167925c8c12e8dc98',
   },

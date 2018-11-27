@@ -3,12 +3,17 @@
 let assert = require('assert');
 let expect = require('expect');
 process.env.DEBUG = 'rand:*';
-process.env.NODE_ENV = 'test';
+// process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'production';
+process.env.FOMO_TRON_ADDRESS = 'TLifQkRyNNtwU978TLKJd281c7qirDyBcW';
+process.env.FOMO_TRON_ACTIVE_ADDRESS = 'TNjWZEw64CfQ6vsnoRaPdrdc2XFdFNRmAz';
+process.env.FOMO_TRON_ACTIVE_PRIVATE_KEY = '';
+
 let debug = require('debug')('rand:test');
 let moment = require('moment');
 const fomoTron = require('../server/lib/betTownFomoTron');
 
-const gameId = 39;
+const gameId = 1;
 describe('A suite for fomoTron', function() {
   this.timeout(1000 * 30);
   let createGame = () => {
@@ -51,6 +56,7 @@ describe('A suite for fomoTron', function() {
     let value = fomoTron.tronWeb.toSun(10);
     let _teamEth = [value, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let comment = 'test';
+    console.log(value);
     fomoTron.buysXid(gameId, _teamEth, 0, value)
       .then(data => {
         console.log(data);
@@ -86,6 +92,15 @@ describe('A suite for fomoTron', function() {
   });
   it('test game', function() {
     fomoTron.getGame(gameId)
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  });
+  it('test status', function() {
+    fomoTron.getGameStatus(gameId)
       .then(data => {
         console.log(data);
       })

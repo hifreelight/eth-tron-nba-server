@@ -100,8 +100,15 @@ https://ropsten.etherscan.io/address/0xccddbf11a195576dec97c5a11a2718e91fc648e2
 
 https://fomosports.me/nba-18-19
 
+sport: https://ropsten.etherscan.io/address/0xB36281e10a881E9F166CF3Ca625F38d724fCc080#code
 
 ## tron
 
 var GameAddr = 'TDdLb1xp4E2zLEtKmKg5z1Ycm1uCqpezZf';
 var BookAddr = 'TQP9RSKu218R6UocK4txTP5Di9wzTeRazq';
+
+https://api.shasta.trongrid.io/wallet/getcontract?value=41281E84151FB705332E682B562CC41662CA91C8FF
+
+https://explorer.shasta.trongrid.io/address/TNqLSgPhUMNJKATaoE8mTAZUkPNdY9WtVg
+
+bank: https://api.shasta.trongrid.io/wallet/getcontract?value=4123a3f8092ca7407be91bb09a56e3d952948e4a82

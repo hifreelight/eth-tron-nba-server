@@ -15,6 +15,10 @@ services:
       - FOMO_OWNER=
       - FOMO_ACTIVE_ADDRESS=
       - FOMO_ACTIVE_PRIVATE_KEY=
+      - FOMO_TRON_ADDRESS=
+      - FOMO_TRON_OWNER=
+      - FOMO_TRON_ACTIVE_ADDRESS=
+      - FOMO_TRON_ACTIVE_PRIVATE_KEY=
       - REDIS_IP=127.0.0.1
       - REDIS_PORT=6379
       - REDIS_PWD=bettown2ol8
