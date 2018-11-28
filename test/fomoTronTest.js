@@ -7,13 +7,13 @@ process.env.DEBUG = 'rand:*';
 process.env.NODE_ENV = 'production';
 process.env.FOMO_TRON_ADDRESS = 'TLifQkRyNNtwU978TLKJd281c7qirDyBcW';
 process.env.FOMO_TRON_ACTIVE_ADDRESS = 'TNjWZEw64CfQ6vsnoRaPdrdc2XFdFNRmAz';
-process.env.FOMO_TRON_ACTIVE_PRIVATE_KEY = '';
+process.env.FOMO_TRON_ACTIVE_PRIVATE_KEY = '26f6dea852a15e2a0f0dfdabec01db40d6224148362e0319b0145796637c1bd2';
 
 let debug = require('debug')('rand:test');
 let moment = require('moment');
 const fomoTron = require('../server/lib/betTownFomoTron');
 
-const gameId = 1;
+const gameId = 14;
 describe('A suite for fomoTron', function() {
   this.timeout(1000 * 30);
   let createGame = () => {

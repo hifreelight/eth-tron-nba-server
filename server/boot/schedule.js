@@ -25,13 +25,16 @@ module.exports = async function(app) {
       })
       .then(match => {
         let closeTime = du.getCurrentTimestamp();
-        if (!match || !match.gameId) {
-          return Promise.reject(`eventId : ${eventId} not create`);
+        let arr = [];
+        if (match && match.gameId) {
+          arr.push(fomo.setCloseTime(match.gameId, closeTime));
+        } else {
+          console.error(`eventId : ${eventId} not create`);
         }
-        return Promise.all([
-          fomo.setCloseTime(match.gameId, closeTime),
-          fomoTron.setCloseTime(match.gameId, closeTime),
-        ]);
+        if (match && match.tronGameId) {
+          arr.push(fomoTron.setCloseTime(match.tronGameId, closeTime));
+        }
+        return Promise.all(arr);
       })
       .then(data => {
         debug('eventId : %d close data is %o', eventId, data);
@@ -67,12 +70,6 @@ module.exports = async function(app) {
       })
       .then(_match => {
         match = _match;
-        if (!match.gameId) {
-          return Promise.reject(`eventId : ${eventId} has not create`);
-        }
-        if (!match.isActivate) {
-          return Promise.reject(`eventId : ${eventId} has not activate`);
-        }
         return Promise.all([
           app.models.Team.findOne({ where: { 'nameZh': match.name1 } }),
           app.models.Team.findOne({ where: { 'nameZh': match.name2 } }),
@@ -99,29 +96,32 @@ module.exports = async function(app) {
         }
         debug('eventId : %d, gameId: %d, winTeamIndex: %d, comment: %s, deadline: %d',
         eventId, match.gameId, winTeamIndex, comment, deadline);
-
-        fomo.settleGame(match.gameId, winTeamIndex, comment, deadline)
-          .then(data => {
-            debug('eventId : %d settle data is %o', eventId, data);
-          })
-          .catch(err => {
-            if (typeof err === 'string') {
-              debug('settleGame err is %s', err);
-            } else {
-              console.error('settleGame err is %o', err);
-            }
-          });
-        fomoTron.settleGame(match.gameId, winTeamIndex, comment, deadline)
-          .then(data => {
-            debug('eventId : %d settle data is %o', eventId, data);
-          })
-          .catch(err => {
-            if (typeof err === 'string') {
-              debug('settleGame err is %s', err);
-            } else {
-              console.error('settleGame err is %o', err);
-            }
-          });
+        if (match.gameId && match.isActivate) {
+          fomo.settleGame(match.gameId, winTeamIndex, comment, deadline)
+            .then(data => {
+              debug('eventId : %d settle data is %o', eventId, data);
+            })
+            .catch(err => {
+              if (typeof err === 'string') {
+                debug('settleGame err is %s', err);
+              } else {
+                console.error('settleGame err is %o', err);
+              }
+            });
+        }
+        if (match.tronGameId && match.tronIsActivate) {
+          fomoTron.settleGame(match.tronGameId, winTeamIndex, comment, deadline)
+            .then(data => {
+              debug('tron eventId : %d settle data is %o', eventId, data);
+            })
+            .catch(err => {
+              if (typeof err === 'string') {
+                debug('settleGame err is %s', err);
+              } else {
+                console.error('settleGame err is %o', err);
+              }
+            });
+        }
       })
       .catch(err => {
         console.error('settle game err is %o', err);
