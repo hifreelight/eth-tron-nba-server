@@ -19,6 +19,8 @@ services:
       - FOMO_TRON_OWNER=
       - FOMO_TRON_ACTIVE_ADDRESS=
       - FOMO_TRON_ACTIVE_PRIVATE_KEY=
+      - SPORT_CREATE_ETH=0
+      - SPORT_CREATE_TRON=1
       - REDIS_IP=127.0.0.1
       - REDIS_PORT=6379
       - REDIS_PWD=bettown2ol8

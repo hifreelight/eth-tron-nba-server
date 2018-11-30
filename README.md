@@ -112,3 +112,21 @@ https://api.shasta.trongrid.io/wallet/getcontract?value=41281E84151FB705332E682B
 https://explorer.shasta.trongrid.io/address/TNqLSgPhUMNJKATaoE8mTAZUkPNdY9WtVg
 
 bank: https://api.shasta.trongrid.io/wallet/getcontract?value=4123a3f8092ca7407be91bb09a56e3d952948e4a82
+
+[资源冻结抵押转换](https://tronstation.io/energycalc)
+[编码转换工具](https://tronscan.org/#/tools/tron-convert-tool)
+
+智能合约的创建和运行需要消耗CPU资源，用于确定智能合约在虚拟机执行过程中消耗的系统时间，单位为微秒。CPU资源以Energy为单位消耗，也就是说1Energy == 1 微秒。 如一条合约在虚拟机中执行花费100微秒，即需要消耗100Energy。 24小时内，TRON网络提供的总CPU资源为50_000_000_000Energy。
+
+带宽
+普通的转账是不收手续费的，但是会消耗bd ，如果bd 不足的情况下会消耗trx
+bd是跟字节有关，一般一笔交易是200字节左右
+每天会有5000免费带宽
+1bd= 10Sun
+https://developers.tron.network/docs/bandwith
+每笔交易消耗的trx根据交易大小计算而来，10sun/byte
+一般一笔交易是200字节左右，即一笔交易0.002TRX
+如果是激活新的账户的话，也是需要0.1trx的，所以如果你是向一个新的账户转账，也是需要消耗0.1trx 的手续费的
+能量
+1energy = 20sun
+1trx 也就是 50000energy

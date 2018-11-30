@@ -12,6 +12,8 @@ const STATUS_OVER = 'over';
 const MATCH_OVER = '完赛';
 const EARLY_OPENING_HOURS = 24;
 const AFTER_DAY = 3;
+const SPORT_CREATE_ETH = process.env.SPORT_CREATE_ETH == 0 ? false : true;
+const SPORT_CREATE_TRON = process.env.SPORT_CREATE_TRON == 0 ? false : true;
 let fomo = require('../lib/betTownFomo');
 const fomoTron = require('../lib/betTownFomoTron');
 
@@ -58,21 +60,28 @@ module.exports = function(Match) {
         for (let i of items) {
           _teams.push(team2.nameEn + i);
         }
-        fomo.createGame(eventId + '', _teams)
+        let sleep = 0;
+        if (SPORT_CREATE_TRON && !matchInstance.tronIsCreated) {
+          sleep = 30;
+          fomoTron.createGame(eventId + '', _teams)
+            .then(response => {
+              debug('createGame response is %o', response);
+            })
+            .catch(err => {
+              console.error('fomo createGame err is %o', err);
+            });
+        }
+        if (SPORT_CREATE_ETH && !matchInstance.isCreated) {
+          sleep = 60;
+          fomo.createGame(eventId + '', _teams)
           .then(response => {
             debug('createGame response is %o', response);
           })
           .catch(err => {
             console.error('fomo createGame err is %o', err);
           });
-        fomoTron.createGame(eventId + '', _teams)
-          .then(response => {
-            debug('createGame response is %o', response);
-          })
-          .catch(err => {
-            console.error('fomo createGame err is %o', err);
-          });
-        cb(null, { sleep: 60 });
+        }
+        cb(null, { sleep });
       })
       .catch(err => cb(err));
   };

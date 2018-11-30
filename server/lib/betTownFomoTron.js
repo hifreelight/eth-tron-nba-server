@@ -12,10 +12,12 @@ const web3 = new Web3();
 
 let contracts = {
   Fomo: {
-    address: isProd ? process.env.FOMO_TRON_ADDRESS :  'TNJ1aHwt3Ux9bfqoS2f5PgWsYM8LnCEhDn',
+    address: isProd ? process.env.FOMO_TRON_ADDRESS :  'TUT3hdByCog5h2ekSSZkmD4GFK7o73vn75',
     owner: isProd ? process.env.FOMO_TRON_OWNER :   'TNJ1aHwt3Ux9bfqoS2f5PgWsYM8LnCEhDn',
-    activeAddress: isProd ? process.env.FOMO_TRON_ACTIVE_ADDRESS :  'TXAsg1x5Y6mnyx5Z3vsCRNRchMvKwJMUbs',
-    activePrivateKey: isProd ? process.env.FOMO_TRON_ACTIVE_PRIVATE_KEY :   '24a1a7e24a956138b0abf0a47cee816bd7180762f2c7df7167925c8c12e8dc98',
+    // activeAddress: isProd ? process.env.FOMO_TRON_ACTIVE_ADDRESS :  'TXAsg1x5Y6mnyx5Z3vsCRNRchMvKwJMUbs',
+    activePrivateKey: isProd ? process.env.FOMO_TRON_ACTIVE_PRIVATE_KEY :   '24a1a7e24a956138b0abf0a47cee816bd7180762f2c7df7167925c8c12e8dc98',//dev
+    activeAddress: isProd ? process.env.FOMO_TRON_ACTIVE_ADDRESS :  'TKB6VGv2Q9EoJJK3Jj5Cx4Ga26xksMqKh4',
+    // activePrivateKey: isProd ? process.env.FOMO_TRON_ACTIVE_PRIVATE_KEY : '3a4c01bf4c19ac828d5d25fe8db2ef651412315e6246629961b2b624b6bfb426', //test
   },
 };
 const tronWeb = new TronWeb(
@@ -83,6 +85,18 @@ class BetTownFomoTron extends EventEmitter {
         return data;
       });
   }
+  getPlayerStatus(gameId, pid) {
+    return this.contract.getPlayerStatus(gameId, pid).call()
+      .then(data => {
+        return data;
+      });
+  }
+  getGameStatus(gameId) {
+    return this.contract.getGameStatus(gameId).call()
+      .then(data => {
+        return data;
+      });
+  }
   activate(gameId, startTime) {
     return this.send('activate', gameId, startTime);
   }
@@ -92,8 +106,8 @@ class BetTownFomoTron extends EventEmitter {
   settleGame(gameId, team, comment, deadline) {
     return this.send('settleGame', gameId, team, comment, deadline);
   }
-  async buysXid(_gameID, _teamEth, _affCode, value) {
-    return this.contract.buysXid(_gameID, _teamEth, _affCode)
+  async buysXid(_gameID, _teamEth, value) {
+    return this.contract.buysXid(_gameID, _teamEth)
       .send({
         shouldPollResponse: true,
         callValue: value,

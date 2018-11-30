@@ -13,6 +13,9 @@
               "FOMO_OWNER":"",
               "FOMO_ACTIVE_ADDRESS":"",
               "FOMO_ACTIVE_PRIVATE_KEY":"",
+              "SPORT_CREATE_ETH":"0",
+              "SPORT_CREATE_TRON":"1"
+
             },
             "name": "Launch Program",
             "program": "${workspaceFolder}\\server\\server.js"
