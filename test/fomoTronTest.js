@@ -7,7 +7,7 @@ process.env.NODE_ENV = 'test';
 // process.env.NODE_ENV = 'production';
 process.env.FOMO_TRON_ADDRESS = 'TWw5degkFDtx6QqbgspHuwFbwT2wNUDwVe';
 process.env.FOMO_TRON_ACTIVE_ADDRESS = 'TNjWZEw64CfQ6vsnoRaPdrdc2XFdFNRmAz';
-process.env.FOMO_TRON_ACTIVE_PRIVATE_KEY = '26f6dea852a15e2a0f0dfdabec01db40d6224148362e0319b0145796637c1bd21';
+process.env.FOMO_TRON_ACTIVE_PRIVATE_KEY = '';
 
 let debug = require('debug')('rand:test');
 let moment = require('moment');
@@ -60,7 +60,7 @@ describe('A suite for fomoTron', function() {
       });
   });
   it('test buy', function(done) {
-    let value = fomoTron.tronWeb.toSun(50);
+    let value = fomoTron.tronWeb.toSun(10);
     let _teamEth = [value, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let comment = 'test';
     console.log(value);

@@ -10,7 +10,7 @@ let moment = require('moment');
 
 describe('A suite for fomo', function() {
   this.timeout(1000 * 120);
-  let gameId = 61;
+  let gameId = '3';
   let createGame = () => {
     fomo.createGame('ten', ['Rocket1', 'Rocket2', 'Rocket3', '4', '5',
       'Thund1', 'Thund2', 'Thund3', 'Thund4', 'Thund5'])
@@ -66,7 +66,7 @@ describe('A suite for fomo', function() {
     let value = fomo.web3.utils.toWei('0.1', 'ether');
     let _teamEth = [value, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let comment = 'test';
-    fomo.buysXid(gameId, _teamEth, 0, comment, value)
+    fomo.buysXid(gameId, _teamEth, value)
       .then(data => {
         console.log(data);
         if (data.status == true) {
@@ -94,6 +94,18 @@ describe('A suite for fomo', function() {
     let deadline = moment().unix() + 3600 * 36;
     let comment = '76er vs huo 102:100';
     fomo.settleGame(gameId, 0, comment, deadline)
+      .then(data => {
+        console.log(data);
+        if (data.status == true) {
+          done();
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  });
+  it('test withdraw', function(done) {
+    fomo.withdraw(gameId)
       .then(data => {
         console.log(data);
         if (data.status == true) {

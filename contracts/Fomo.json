@@ -5,41 +5,6 @@
       "constant": true,
       "inputs": [
         {
-          "name": "",
-          "type": "uint256"
-        },
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "playerComments_",
-      "outputs": [
-        {
-          "name": "playerID",
-          "type": "uint256"
-        },
-        {
-          "name": "playerName",
-          "type": "bytes32"
-        },
-        {
-          "name": "ethIn",
-          "type": "uint256"
-        },
-        {
-          "name": "comment",
-          "type": "string"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
           "name": "_gameID",
           "type": "uint256"
         },
@@ -202,32 +167,6 @@
         {
           "name": "_gameID",
           "type": "uint256"
-        },
-        {
-          "name": "_teamEth",
-          "type": "uint256[]"
-        },
-        {
-          "name": "_affCode",
-          "type": "uint256"
-        },
-        {
-          "name": "_comment",
-          "type": "string"
-        }
-      ],
-      "name": "buysXid",
-      "outputs": [],
-      "payable": true,
-      "stateMutability": "payable",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_gameID",
-          "type": "uint256"
         }
       ],
       "name": "withdraw",
@@ -240,25 +179,6 @@
       "constant": true,
       "inputs": [],
       "name": "gameIDIndex_",
-      "outputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "constant": true,
-      "inputs": [
-        {
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "playerCommentsIndex_",
       "outputs": [
         {
           "name": "",
@@ -394,6 +314,24 @@
       ],
       "payable": false,
       "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_gameID",
+          "type": "uint256"
+        },
+        {
+          "name": "_teamEth",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "buysXid",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
       "type": "function"
     },
     {
@@ -893,58 +831,11 @@
         },
         {
           "indexed": false,
-          "name": "affID",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
           "name": "timestamp",
           "type": "uint256"
         }
       ],
       "name": "onPurchase",
-      "type": "event"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": true,
-          "name": "gameID",
-          "type": "uint256"
-        },
-        {
-          "indexed": true,
-          "name": "playerID",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "name": "playerAddress",
-          "type": "address"
-        },
-        {
-          "indexed": false,
-          "name": "playerName",
-          "type": "bytes32"
-        },
-        {
-          "indexed": false,
-          "name": "ethIn",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "name": "comment",
-          "type": "string"
-        },
-        {
-          "indexed": false,
-          "name": "timestamp",
-          "type": "uint256"
-        }
-      ],
-      "name": "onComment",
       "type": "event"
     },
     {

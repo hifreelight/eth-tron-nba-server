@@ -30,7 +30,7 @@ module.exports = function(app) {
     })
     .on('data', function(event) {
       debug('onGameCreated data is %o', event);
-      let gameId = event.returnValues.gameID;
+      let gameId = parseInt(event.returnValues.gameID);
       let timestamp = parseInt(event.returnValues.timestamp);
       if (timestamp + 3600 * 24 < du.getCurrentTimestamp()) {
         debug('onGameCreated past event gameId is %d, timestamp: %s', gameId, timestamp);

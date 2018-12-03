@@ -16,7 +16,7 @@ let contracts = {
   Fomo: {
     // address: isProd ? process.env.FOMO_ADDRESS :  '0xaef4224aaae293f877ae79480c2404573965feea',
     // address: isProd ? process.env.FOMO_ADDRESS :  '0x0C83A94238fd2491D9E09D679708abe90ecB2657',
-    address: isProd ? process.env.FOMO_ADDRESS :  '0xB36281e10a881E9F166CF3Ca625F38d724fCc080',
+    address: isProd ? process.env.FOMO_ADDRESS :  '0x2b9FBbED7cC50B7f287c76c3d31489E490510374',
     owner: isProd ? process.env.FOMO_OWNER :   '0x7b6a507BA5e2c249984Ab3d9517a7133fC0e6703',
     activeAddress: isProd ? process.env.FOMO_ACTIVE_ADDRESS :  '0xfCaF08c2b82618B377338265629e686D711B3714',
     activePrivateKey: isProd ? process.env.FOMO_ACTIVE_PRIVATE_KEY :   '221310E2B78B34A2D756A1E8ED79A6BCCE1ADD1FE31D3313A991F70E993E9294',
@@ -132,8 +132,11 @@ class BetTownFomo extends EventEmitter {
   settleGame(gameId, team, comment, deadline) {
     return this.send('settleGame', gameId, team, comment, deadline);
   }
-  async buysXid(_gameID, _teamEth, _affCode, comment, value) {
-    let txBuilder = fomoContract.methods.buysXid(_gameID, _teamEth, _affCode, comment);
+  withdraw(gameId) {
+    return this.send('withdraw', gameId);
+  }
+  async buysXid(_gameID, _teamEth, value) {
+    let txBuilder = fomoContract.methods.buysXid(_gameID, _teamEth);
     let encodedTx = txBuilder.encodeABI();
     let amountOfGas = 4000000;
     let nonce = await web3.eth.getTransactionCount(activeAddress) + 1;
