@@ -25,7 +25,8 @@ module.exports = function(app) {
   let onGameCreated = () => {
     fomoTron.contract.onGameCreated().watch((err, data)=> {
       if (!data) {
-        return console.error('onGameCreated data is null or undefined');
+        // debug('onGameCreated data is null or undefined');
+        return;
       }
       let { result } = data;
       if (err) return console.error('Failed to bind event listener:', err);
@@ -66,7 +67,8 @@ module.exports = function(app) {
   let onGameActivated = () => {
     fomoTron.contract.onGameActivated().watch((err, data)=> {
       if (!data) {
-        return console.error('onGameActivated data is null or undefined');
+        debug('onGameActivated data is null or undefined');
+        return;
       }
       let { result } = data;
       if (err) return console.error('Failed to bind event onGameActivated listener:', err);

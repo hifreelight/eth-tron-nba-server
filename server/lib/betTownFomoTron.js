@@ -1,5 +1,5 @@
 'use strict';
-
+require('dotenv').config({ path: __dirname + '/../../test/.env' });
 const debug = require('debug')('rand:lib:betTownFomoTron');
 const EventEmitter = require('events').EventEmitter;
 const TronWeb = require('tronweb');
@@ -12,7 +12,7 @@ const web3 = new Web3();
 
 let contracts = {
   Fomo: {
-    address: isProd ? process.env.FOMO_TRON_ADDRESS : 'TEFvyUB5KHkEgmXoL9akBe15otp73XmNYD',
+    address: isProd ? process.env.FOMO_TRON_ADDRESS : 'TL8zwVcxTuD6TUWxjeBnQtj6RCQv2w6hpC',
     owner: isProd ? process.env.FOMO_TRON_OWNER : 'TNJ1aHwt3Ux9bfqoS2f5PgWsYM8LnCEhDn',
     activeAddress: isProd ? process.env.FOMO_TRON_ACTIVE_ADDRESS :  'TXAsg1x5Y6mnyx5Z3vsCRNRchMvKwJMUbs',
     activePrivateKey: isProd ? process.env.FOMO_TRON_ACTIVE_PRIVATE_KEY :   '24a1a7e24a956138b0abf0a47cee816bd7180762f2c7df7167925c8c12e8dc98',//dev

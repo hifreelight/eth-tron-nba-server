@@ -11,6 +11,7 @@ const STATUS_COMING = 'coming';
 const STATUS_OVER = 'over';
 const MATCH_OVER = '完赛';
 const EARLY_OPENING_HOURS = 24;
+const OVER_TIME_LIMIT = -24;
 const AFTER_DAY = 3;
 const SPORT_CREATE_ETH = process.env.SPORT_CREATE_ETH == 0 ? false : true;
 const SPORT_CREATE_TRON = process.env.SPORT_CREATE_TRON == 0 ? false : true;
@@ -93,8 +94,8 @@ module.exports = function(Match) {
     let filters = { where: { category: 'nba' }, include: ['team1', 'team2'], order: 'time ASC' };
     if (status == STATUS_OPENING) {
       let time = du.getTimeByHour(EARLY_OPENING_HOURS);
-
-      filters.where = _.merge(filters.where, { time: { lte: time }, periodCn: { neq: MATCH_OVER } });
+      let overTimeLimit = du.getTimeByHour(OVER_TIME_LIMIT);
+      filters.where = _.merge(filters.where, { time: { lte: time, gt: overTimeLimit }, periodCn: { neq: MATCH_OVER } });
       if (coin == 'eth') {
         filters.where = _.merge(filters.where, { isActivate: 1 });
       } else {
